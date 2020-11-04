@@ -1,3 +1,2 @@
 C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\ComputerGraphics\Debug\Meshviewer.exe
 C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\ComputerGraphics\Debug\Meshviewer.pdb
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\Debug\Meshviewer.exe

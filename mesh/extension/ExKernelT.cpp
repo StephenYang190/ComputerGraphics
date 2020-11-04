@@ -28,9 +28,9 @@ namespace MeshN {
 	template<class ExItems>
 	void ExKernelT<ExItems>::meshInit(){
 
-		update_facet_normals();//¼ÆËãËùÓÐÈý½ÇÃæÆ¬µÄ·¨Ïò
+		update_facet_normals();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½Ä·ï¿½ï¿½ï¿½
 		update_area();
-		update_edge_length();//¼ÆËãËùÓÐÍø¸ñµÄ±ß³¤
+		update_edge_length();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ß³ï¿?
 
 
 	}
@@ -40,33 +40,38 @@ namespace MeshN {
 	template<class ExItems>
 	void ExKernelT<ExItems>::Laplacian_Smoothing(){
 
-		/////ÇëÊµÏÖ×Ô¼ºµÄÈ¥ÔëËã·¨////////
+		/////ï¿½ï¿½Êµï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½È¥ï¿½ï¿½ï¿½ã·¨////////
 	}
 
 ////////////////////////////////////////////////////////////////////////////////////
 	template<class ExItems>
-	void ExKernelT<ExItems>::mesh_process(){///////(¿ÉÑ¡£¬ÔÚÈý½ÇÍø¸ñÉÏÊµÏÖÒ»ÖÖ²Ù×÷£¬ÀýÈçÌØÕ÷ÌáÈ¡£¬Íø¸ñ·Ö¸î£¬Èý½ÇÍø¸ñ±äÐÎµÈµÈ)
+	void ExKernelT<ExItems>::mesh_process(){///////(ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½Ò»ï¿½Ö²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸î£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎµÈµï¿½)
 
 	}
 
 ////////////////////////////////////////////////////////////////////////////////////
 	template<class ExItems>
 	typename ExKernelT<ExItems>::Scalar
-		ExKernelT<ExItems>::calc_facet_area(const FacetHandle& _fh){/////¼ÆËãÈý½ÇÐÎµÄÃæ»ý
+		ExKernelT<ExItems>::calc_facet_area(const FacetHandle& _fh){/////ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îµï¿½ï¿½ï¿½ï¿?
 
-			///µÃµ½°ë±ß¾ä±ú
+			///ï¿½Ãµï¿½ï¿½ï¿½ß¾ï¿½ï¿½
+			HalfedgeHandle he1 = halfedge_handle(_fh);
+			HalfedgeHandle he2 = next_halfedge_handle(he1);
+			HalfedgeHandle he3 = prev_halfedge_handle(he1);
 
+			////ï¿½É°ï¿½ß¾ï¿½ï¿½ï¿½Ãµï¿½ï¿½ß¾ï¿½ï¿?
+			EdgeHandle eh1 = edge_handle(he1);
+			EdgeHandle eh2 = edge_handle(he2);
+			EdgeHandle eh3 = edge_handle(he3);
 
-			////ÓÉ°ë±ß¾ä±úµÃµ½±ß¾ä±ú
+			////ï¿½É±ß¾ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ß³ï¿?
+			Scalar el1 = calc_edge_length(eh1);
+			Scalar el2 = calc_edge_length(eh2);
+			Scalar el3 = calc_edge_length(eh3);
 
-
-			////ÓÉ±ß¾ä±úµÃµ½¸÷±ß³¤
-
-
-			////ÀûÓÃº£Â×¹«Ê½ÇóÃæ»ýs=sqrt(p(p-a)(p-b)(p-c))
-			Scalar area = 0.0;
-
-
+			////ï¿½ï¿½ï¿½Ãºï¿½ï¿½×¹ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½s=sqrt(p(p-a)(p-b)(p-c))
+			Scalar avr = (el1 + el2 + el3) / 2;
+			Scalar area = sqrt(avr * (avr - el1)* (avr - el2)* (avr - el3));
 
 			facet_ref(_fh).area_ = area;
 			return area;
@@ -74,7 +79,7 @@ namespace MeshN {
 
 	//////////////////////////////////////////////////////////////////////////////
 	template<class ExItems>
-	void ExKernelT<ExItems>::update_area()//¼ÆËãËùÓÐÈý½ÇÃæÆ¬µÄÃæ»ý
+	void ExKernelT<ExItems>::update_area()//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½ï¿½ï¿?
 	{   
 		set_isArea(true);
 		Scalar max_area = 0.0;
@@ -117,7 +122,7 @@ namespace MeshN {
 
 	template<class ExItems>
 	void
-		ExKernelT<ExItems>::getNeighborRing(VertexHandle& _vh, int _ring, std::vector<VertexHandle>& NeighborRing){//µÃµ½µÚring»·ÁÚ½Óµã
+		ExKernelT<ExItems>::getNeighborRing(VertexHandle& _vh, int _ring, std::vector<VertexHandle>& NeighborRing){//ï¿½Ãµï¿½ï¿½ï¿½ringï¿½ï¿½ï¿½Ú½Óµï¿½
 
 			NeighborRing.push_back( _vh );
 			int iteration = 0;
@@ -274,7 +279,7 @@ namespace MeshN {
 			const Coord& cd2 = coord( vertex_handle(n_hh) );
 
 			//return ((cd1-cd0)%(cd2-cd1)).normalize();
-			return ((cd2-cd1)%(cd1-cd0)).normalize();//Á½¸öÏòÁ¿²æ³Ë²¢ÇÒµ¥Î»»¯ be careful
+			return ((cd2-cd1)%(cd1-cd0)).normalize();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë²ï¿½ï¿½Òµï¿½Î»ï¿½ï¿? be careful
 	}
 
 
@@ -307,13 +312,13 @@ namespace MeshN {
 ///////////////////////////////////////////////////////////////////////////////
 	template <class ExItems> 
 	typename ExKernelT<ExItems>::Normal
-		ExKernelT<ExItems>::calc_normal(const VertexHandle& _vh) {////¸üÐÂÒ»¸ö¶¥µãµÄ·¨Ïò
+		ExKernelT<ExItems>::calc_normal(const VertexHandle& _vh) {////ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿?
 			assert( _vh.is_valid());
 			assert( _vh.idx() < vertex_size() );
 
-			Normal          norm(1,1,1);///////ÓÃnorm´æ´¢ÇóµÃµÄ·¨ÏòÖµ
+			Normal          norm(1,1,1);///////ï¿½ï¿½normï¿½æ´¢ï¿½ï¿½ÃµÄ·ï¿½ï¿½ï¿½Ö?
 
-//////////////////////////ÔÚ´ËÊµÏÖ////////////////////////////////////
+//////////////////////////ï¿½Ú´ï¿½Êµï¿½ï¿½////////////////////////////////////
 
 
 
@@ -325,7 +330,7 @@ namespace MeshN {
 
 ///////////////////////////////////////////////////////////////////////////////
 	template <class ExItems> 
-	void ExKernelT<ExItems>::update_vertex_normals(void) {//¸üÐÂËùÓÐ¶¥µãµÄ·¨Ïò
+	void ExKernelT<ExItems>::update_vertex_normals(void) {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿?
 		VertexIterator vi = vertex_begin();
 
 		for ( ; vi!=vertex_end(); ++vi) {
@@ -367,8 +372,8 @@ namespace MeshN {
 
 					float weight = vec12cross.length() / (vec1.sqLength() * vec2.sqLength() );
 
-					n += facet_ref(fh).normal_ * weight;//---------------------------------------×¢Òâ
-					//n += calc_normal(fh);//---------------------------------×¢Òâ
+					n += facet_ref(fh).normal_ * weight;//---------------------------------------×¢ï¿½ï¿½
+					//n += calc_normal(fh);//---------------------------------×¢ï¿½ï¿½
 
 				}//if
 
@@ -405,7 +410,7 @@ namespace MeshN {
 
 	///////////////////////////////////////////////////////////////////////////////
 	template <class ExItems> 
-	void ExKernelT<ExItems>::update_edge_length(void) {//¼ÆËãÍø¸ñÖÐ±ß³¤ÐÅÏ¢
+	void ExKernelT<ExItems>::update_edge_length(void) {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ß³ï¿½ï¿½ï¿½Ï¢
 		float global_max_edge_length_ = 0;
 		float averagedlength = 0.0;
 
@@ -450,7 +455,7 @@ namespace MeshN {
 
 	//	unsigned int NumFacet = facet_size();
 
-	//	ps_ = new PointSet(NumFacet);//³õÊ¼»¯
+	//	ps_ = new PointSet(NumFacet);//ï¿½ï¿½Ê¼ï¿½ï¿½
 
 	//	FacetIterator fi = facet_begin();
 	//	unsigned int i = 0;
@@ -494,9 +499,9 @@ namespace MeshN {
 			std::cin>>T;
 
 			int iteration;
-			std::cout<<"Input facenormal filtering numbers (5-20´Î): ";
+			std::cout<<"Input facenormal filtering numbers (5-20ï¿½ï¿½): ";
 			std::cin>>iteration;
-			std::cout << "ÓÉÓÚµü´ú£¬±È½ÏºÄÊ±£¡"<<std::endl;
+			std::cout << "ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È½Ïºï¿½Ê±ï¿½ï¿½"<<std::endl;
 			std::cout << "Please wait.....  "<<std::endl;
 			int i = 0, j = 0;
 			clock_t t1 = clock();
@@ -574,9 +579,9 @@ namespace MeshN {
 
 			int vertex_num = vertex_size();
 			int iterations;
-			std::cout<<"Input vertex update iterations (10-30´Î): ";
+			std::cout<<"Input vertex update iterations (10-30ï¿½ï¿½): ";
 			std::cin>>iterations;
-			std::cout << "ÓÉÓÚµü´ú£¬±È½ÏºÄÊ±£¡" << std::endl;
+			std::cout << "ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È½Ïºï¿½Ê±ï¿½ï¿½" << std::endl;
 			std::cout << "Please wait.....  " << std::endl;
 			int i = 0;
 
@@ -639,10 +644,10 @@ namespace MeshN {
 
 			}//for
 
-			std::cout<<"Input facet normal filtering iteration numbers (5-20´Î): ";
+			std::cout<<"Input facet normal filtering iteration numbers (5-20ï¿½ï¿½): ";
 			int num;//the iteration num
 			std::cin>>num;
-			std::cout << "ÓÉÓÚµü´ú£¬±È½ÏºÄÊ±£¡" << std::endl;
+			std::cout << "ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È½Ïºï¿½Ê±ï¿½ï¿½" << std::endl;
 			std::cout << "Please wait.....  " << std::endl;
 
 			clock_t t1 = clock();
@@ -703,10 +708,10 @@ namespace MeshN {
 
 			int vertex_num = vertex_size();
 			int iterations;
-			std::cout<<"Input vertex update iterations(5-30´Î): ";
+			std::cout<<"Input vertex update iterations(5-30ï¿½ï¿½): ";
 			std::cin>>iterations;
 			int i = 0;
-			std::cout << "ÓÉÓÚµü´ú£¬±È½ÏºÄÊ±£¡" << std::endl;
+			std::cout << "ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È½Ïºï¿½Ê±ï¿½ï¿½" << std::endl;
 			std::cout << "Please wait.....  " << std::endl;
 			clock_t t1 = clock();
 			do{

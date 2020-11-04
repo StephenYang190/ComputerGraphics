@@ -42,6 +42,7 @@ void Usage(void) {
 int main(int argc, char *argv[]) {
 
 	Usage();
+	glutInit(&argc, argv);
 	glutInitWindowPosition(400, 0);
 	glutInitWindowSize(620, 620);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DEPTH | GLUT_DOUBLE);
@@ -62,5 +63,8 @@ int main(int argc, char *argv[]) {
 	MyMeshInit();///里面加载各种函数对网格模型进行处理
 
 	glutMainLoop();
+
+	getchar();
+	getchar();
 	return 0;
 }

@@ -403,14 +403,14 @@ namespace MeshN {
 	template  <class Items>                                    // add facet to mesh
 	typename KernelT<Items>::FacetHandle
 		KernelT<Items>::add_facet(const std::vector<VertexHandle>& _vhs) { 
-			std::vector<HalfedgeHandle>   halfedge_handles; //¼ÇÂ¼ĞÂÃæÆ¬µÄ°ë±ßºÅ!
-			std::vector<bool>             flags;            //ÉÏÊö°ë±ßÒÑÔÚÍø¸ñÖĞ?
-			FacetHandle                   new_facet_handle (facets_.size());  //ĞÂÃæ±ú 
-			int  i, j, cnt(_vhs.size());                    //Ñ­»·±äÁ¿&Ñ­»·¼ÇÊıÆ÷
+			std::vector<HalfedgeHandle>   halfedge_handles; //è®°å½•æ–°é¢ç‰‡çš„åŠè¾¹å·!
+			std::vector<bool>             flags;            //ä¸Šè¿°åŠè¾¹å·²åœ¨ç½‘æ ¼ä¸­?
+			FacetHandle                   new_facet_handle (facets_.size());  //æ–°é¢æŸ„ 
+			int  i, j, cnt(_vhs.size());                    //å¾ªç¯å˜é‡&å¾ªç¯è®°æ•°å™¨
 
-			assert( cnt >= 3 );  //ÎŞ¶¥µãÊıÉÙÓÚ3µÄÃæ!
+			assert( cnt >= 3 );  //æ— é¡¶ç‚¹æ•°å°‘äº3çš„é¢!
 
-			///ÑéÖ¤ËùÓĞ¶¥µãÊÇ·ñ¶¼Îª±ß½ç¶¥µã///////
+			///éªŒè¯æ‰€æœ‰é¡¶ç‚¹æ˜¯å¦éƒ½ä¸ºè¾¹ç•Œé¡¶ç‚¹///////
 			for ( i=0; i<cnt; ++i ) {
 				//assert( _vhs[i].is_valid() );
 				if ( !is_boundary_vertex(_vhs[i]) ) {
@@ -420,49 +420,49 @@ namespace MeshN {
 				}
 			} 
 
-			///×¢²áËùÓĞµÄ°ë±ß,²¢¼ÓÈëÈ±Ê§µÄ°ë±ß(Óë±ß)
+			///æ³¨å†Œæ‰€æœ‰çš„åŠè¾¹,å¹¶åŠ å…¥ç¼ºå¤±çš„åŠè¾¹(ä¸è¾¹)
 			for (j=cnt-1, i=0; i<cnt; j=(j+1)%cnt, ++i) { 
 				HalfedgeHandle heh = _find_halfedge_handle(_vhs[j], _vhs[i]); 
 
 				if ( heh.is_valid() ) {  
-					//Èç¹û°ë±ßÒÑÔÚÍø¸ñÖĞ,ÔòÑéÖ¤ÆäÊÇ·ñÎª±ß½ç°ë±ß
-					if ( ! is_boundary_halfedge(heh) ) { //Îª¸´ÔÓ±ß
+					//å¦‚æœåŠè¾¹å·²åœ¨ç½‘æ ¼ä¸­,åˆ™éªŒè¯å…¶æ˜¯å¦ä¸ºè¾¹ç•ŒåŠè¾¹
+					if ( ! is_boundary_halfedge(heh) ) { //ä¸ºå¤æ‚è¾¹
 						std::cout<<"Error: Complex edge: <";
 						std::cout<<_vhs[j]<<", "<<_vhs[i]<<"("<<heh<<")"<<"> !\n";
 						exit(0);
 					}
-					halfedge_handles.push_back( heh );  //×¢²áÖ®
-					flags.push_back(true); //±ê¼ÇÖ®
+					halfedge_handles.push_back( heh );  //æ³¨å†Œä¹‹
+					flags.push_back(true); //æ ‡è®°ä¹‹
 				}  
 				else {
-					//°ë±ß²»ÔÚÍø¸ñÖĞ,ĞèÒª¼ÓÈëÈ±Ê§µÄ±ß(°ë±ß), ²¢×¢²áÖ® 
+					//åŠè¾¹ä¸åœ¨ç½‘æ ¼ä¸­,éœ€è¦åŠ å…¥ç¼ºå¤±çš„è¾¹(åŠè¾¹), å¹¶æ³¨å†Œä¹‹ 
 					halfedge_handles.push_back(
 						halfedge_handle( add_edge(_vhs[j], _vhs[i]), 1) );
-					//×¢Òâ:ÉÏÃæ¼ÓÈë±ßµÄÈ±Ê§°ë±ßÎªµÚ¶şÌõ°ë±ß!!!!!!!!!!
+					//æ³¨æ„:ä¸Šé¢åŠ å…¥è¾¹çš„ç¼ºå¤±åŠè¾¹ä¸ºç¬¬äºŒæ¡åŠè¾¹!!!!!!!!!!
 					flags.push_back(false);
 				}
 
-				//ÖÃËùÓĞ°ë±ßµÄÃæÆ¬ºÅ
+				//ç½®æ‰€æœ‰åŠè¾¹çš„é¢ç‰‡å·
 				halfedge_ref(halfedge_handles[i]).facet_handle_ = new_facet_handle;
 			}
 
-			///½¨Á¢ÓëĞÂÌí¼ÓÃæÆ¬Ïà¹ØµÄ°ë±ßÍØÆË¹ØÏµ
+			///å»ºç«‹ä¸æ–°æ·»åŠ é¢ç‰‡ç›¸å…³çš„åŠè¾¹æ‹“æ‰‘å…³ç³»
 			for (i=0, j=1; i<cnt; ++i, j=(j+1)%cnt) {
-				int flag(0);  //±ê¼ÇÏà¼ÌÁ½Ìõ°ë±ßµÄ´æÔÚ(ĞÂ/¾É)¹ØÏµ
+				int flag(0);  //æ ‡è®°ç›¸ç»§ä¸¤æ¡åŠè¾¹çš„å­˜åœ¨(æ–°/æ—§)å…³ç³»
 
-				if ( !flags[i] )  flag |= 1; //Ïà¼Ì°ë±ßµÄ¹ØÏµ
+				if ( !flags[i] )  flag |= 1; //ç›¸ç»§åŠè¾¹çš„å…³ç³»
 				if ( !flags[j] )  flag |= 2;
 
 				Halfedge& he0 = halfedge_ref( halfedge_handles[i] );
 				switch (flag){
-				case 0: { //Á½Ìõ°ë±ß¾ù²»ÊÇ¸Õ¸ÕÉú³ÉµÄ
-					//Èç¹ûÎ»ÖÃ´íÂÒ, Ôòµ÷ÕûÖ®
+				case 0: { //ä¸¤æ¡åŠè¾¹å‡ä¸æ˜¯åˆšåˆšç”Ÿæˆçš„
+					//å¦‚æœä½ç½®é”™ä¹±, åˆ™è°ƒæ•´ä¹‹
 					if ( next_halfedge_handle(halfedge_handles[i]) != halfedge_handles[j] )
 						_fix_halfedge_order( halfedge_handles[i], halfedge_handles[j] );
 					break;
 						} //case 0
 
-				case 1: { //Ç°Ò»Ìõ°ë±ßĞÂµÄ,ºóÒ»ÌõÊÇÀÏµÄ
+				case 1: { //å‰ä¸€æ¡åŠè¾¹æ–°çš„,åä¸€æ¡æ˜¯è€çš„
 					he0.next_halfedge_handle_ = halfedge_handles[j];
 
 					halfedge_ref(opposite_halfedge_handle(halfedge_handles[i])).
@@ -474,11 +474,11 @@ namespace MeshN {
 					halfedge_ref(halfedge_handles[j]).
 						prev_halfedge_handle_ = halfedge_handles[i];
 
-					//NOTE:¶¥µã(_vns[i])µÄµÚÒ»Ìõ(±ß½ç)°ë±ß±£³Ö²»±ä!!
+					//NOTE:é¡¶ç‚¹(_vns[i])çš„ç¬¬ä¸€æ¡(è¾¹ç•Œ)åŠè¾¹ä¿æŒä¸å˜!!
 					break;
 						} //case 1
 
-				case 2: {//Ç°Ò»Ìõ°ë±ßÊÇÀÏµÄ, ¶øºóÒ»ÌõÔòÊÇĞÂ½üÉú³ÉµÄ
+				case 2: {//å‰ä¸€æ¡åŠè¾¹æ˜¯è€çš„, è€Œåä¸€æ¡åˆ™æ˜¯æ–°è¿‘ç”Ÿæˆçš„
 					halfedge_ref(halfedge_handles[j]).
 						prev_halfedge_handle_ = halfedge_handles[i];
 
@@ -490,35 +490,35 @@ namespace MeshN {
 
 					he0.next_halfedge_handle_ = halfedge_handles[j];
 
-					//NOTE: °ë±ß_opposite_halfedge_handle(halfedge_handles[j])ÊÇ±ß½ç°ë±ß!! 
+					//NOTE: åŠè¾¹_opposite_halfedge_handle(halfedge_handles[j])æ˜¯è¾¹ç•ŒåŠè¾¹!! 
 					vertex_ref(_vhs[i]).halfedge_handle_ =
 						opposite_halfedge_handle(halfedge_handles[j]);
 
 					break;
 						} //case 2
 
-				case 3: {//Á½Ìõ°ë±ß¾ùÊÇĞÂ½ü²úÉúµÄ
+				case 3: {//ä¸¤æ¡åŠè¾¹å‡æ˜¯æ–°è¿‘äº§ç”Ÿçš„
 					he0.next_halfedge_handle_ = halfedge_handles[j];
 					halfedge_ref(halfedge_handles[j]).
 						prev_halfedge_handle_ = halfedge_handles[i];
 
 					if ( !halfedge_handle(_vhs[i]).is_valid() ) { //???????
-						//Èç¹û(_vns[i])ÊÇ¹ÂÁ¢¶¥µã
+						//å¦‚æœ(_vns[i])æ˜¯å­¤ç«‹é¡¶ç‚¹
 						halfedge_ref(opposite_halfedge_handle(halfedge_handles[i])).
 							prev_halfedge_handle_ = opposite_halfedge_handle(halfedge_handles[j]);
 
 						halfedge_ref(opposite_halfedge_handle(halfedge_handles[j])).
 							next_halfedge_handle_ = opposite_halfedge_handle(halfedge_handles[i]);
 
-						//Note: °ë±ß_opposite_halfedge_handle(halfedge_handles[j])Îª±ß½ç°ë±ß
+						//Note: åŠè¾¹_opposite_halfedge_handle(halfedge_handles[j])ä¸ºè¾¹ç•ŒåŠè¾¹
 						vertex_ref(_vhs[i]).halfedge_handle_
 							= opposite_halfedge_handle( halfedge_handles[j] );  
 
 					} else {
-						//·ñÔò,¶¥µã(_vns[i])²»ÊÇ¹ÂÁ¢¶¥µã,Ëü´æÔÚ×ÅÆäËüÁ¬½Ó¹ØÏµ
+						//å¦åˆ™,é¡¶ç‚¹(_vns[i])ä¸æ˜¯å­¤ç«‹é¡¶ç‚¹,å®ƒå­˜åœ¨ç€å…¶å®ƒè¿æ¥å…³ç³»
 						HalfedgeHandle& v_heh = halfedge_handle( _vhs[i] ); 
 
-						//Note: ÕâÊ±°ë±ß[_halfedgeHandle(_vhs[i])]Ó¦Îª±ß½ç°ë±ß
+						//Note: è¿™æ—¶åŠè¾¹[_halfedgeHandle(_vhs[i])]åº”ä¸ºè¾¹ç•ŒåŠè¾¹
 						assert( is_boundary_halfedge(v_heh) );
 
 						halfedge_ref(opposite_halfedge_handle(halfedge_handles[j])).
@@ -533,7 +533,7 @@ namespace MeshN {
 						halfedge_ref(opposite_halfedge_handle(halfedge_handles[i])).
 							prev_halfedge_handle_ = v_heh;
 
-						//NOTE:ÕâÊ±¶¥µãµÄµÚÒ»°ë±ßÈÔÎª±ß½ç°ë±ß,ÎŞĞèµ÷Õû
+						//NOTE:è¿™æ—¶é¡¶ç‚¹çš„ç¬¬ä¸€åŠè¾¹ä»ä¸ºè¾¹ç•ŒåŠè¾¹,æ— éœ€è°ƒæ•´
 					}//case 3
 						}//switch
 				}//end of for
@@ -541,7 +541,7 @@ namespace MeshN {
 				_adjust_to_boundary_halfedge( _vhs[i] );
 			}
 
-			//²úÉúĞÂÃæÆ¬,×¢ÒâÆäÖĞµÄ°ë±ßÍØÆË¹ØÏµÃ»ÓĞÍêÈ«È·¶¨ÏÂÀ´
+			//äº§ç”Ÿæ–°é¢ç‰‡,æ³¨æ„å…¶ä¸­çš„åŠè¾¹æ‹“æ‰‘å…³ç³»æ²¡æœ‰å®Œå…¨ç¡®å®šä¸‹æ¥
 			Facet facet;
 			facet.halfedge_handle_ = halfedge_handles[0];
 			facets_.push_back( facet ); 
@@ -558,53 +558,53 @@ namespace MeshN {
 	{ 
 		VertexHandle vhs[3] = { _vh0, _vh1, _vh2 };
 
-		///ÑéÖ¤ËùÓĞ¶¥µãÊÇ·ñ¶¼Îª±ß½ç¶¥µã//////////////////////
+		///éªŒè¯æ‰€æœ‰é¡¶ç‚¹æ˜¯å¦éƒ½ä¸ºè¾¹ç•Œé¡¶ç‚¹//////////////////////
 		//assert( vhs[0].is_valid() && vhs[1].is_valid() && vhs[2].is_valid() );
 		assert( is_boundary_vertex(vhs[0]) && is_boundary_vertex(vhs[1]) &&
 			is_boundary_vertex(vhs[2]) );
 
-		HalfedgeHandle  heHandles[3]; //¼ÇÂ¼ĞÂÃæÆ¬µÄ°ë±ßºÅ!
-		bool            flags[3];     //ÉÏÊö°ë±ßÒÑÔÚÍø¸ñÖĞ?
-		FacetHandle     newFacetHandle ( facets_.size() );  //±»ÌíÈëÃæÆ¬µÄĞòºÅ!
-		int             i, j;     //Ñ­»·±äÁ¿&Ñ­»·¼ÇÊıÆ÷
+		HalfedgeHandle  heHandles[3]; //è®°å½•æ–°é¢ç‰‡çš„åŠè¾¹å·!
+		bool            flags[3];     //ä¸Šè¿°åŠè¾¹å·²åœ¨ç½‘æ ¼ä¸­?
+		FacetHandle     newFacetHandle ( facets_.size() );  //è¢«æ·»å…¥é¢ç‰‡çš„åºå·!
+		int             i, j;     //å¾ªç¯å˜é‡&å¾ªç¯è®°æ•°å™¨
 
-		///×¢²áËùÓĞµÄ°ë±ß,²¢¼ÓÈëÈ±Ê§µÄ°ë±ß(Óë±ß)/////////////
+		///æ³¨å†Œæ‰€æœ‰çš„åŠè¾¹,å¹¶åŠ å…¥ç¼ºå¤±çš„åŠè¾¹(ä¸è¾¹)/////////////
 		for (j=2, i=0; i<3; j=(j+1)%3, ++i) {
 			HalfedgeHandle heh = _find_halfedge_handle(vhs[j], vhs[i]); 
-			//Èç¹û°ë±ßÒÑÔÚÍø¸ñÖĞ,ÑéÖ¤ÆäÊÇ·ñÎª±ß½ç°ë±ß
+			//å¦‚æœåŠè¾¹å·²åœ¨ç½‘æ ¼ä¸­,éªŒè¯å…¶æ˜¯å¦ä¸ºè¾¹ç•ŒåŠè¾¹
 			if ( heh.is_valid() ) { 
-				assert( is_boundary_halfedge(heh) ); //²»Îª¸´ÔÓ±ß
-				heHandles[i] = heh;  //×¢²áÖ®
-				flags[i]     = true; //±ê¼ÇÖ®
+				assert( is_boundary_halfedge(heh) ); //ä¸ä¸ºå¤æ‚è¾¹
+				heHandles[i] = heh;  //æ³¨å†Œä¹‹
+				flags[i]     = true; //æ ‡è®°ä¹‹
 			}
-			//°ë±ß²»ÔÚÍø¸ñÖĞ,ĞèÒª¼ÓÈëÈ±Ê§µÄ±ß(°ë±ß), ²¢×¢²áÖ®
+			//åŠè¾¹ä¸åœ¨ç½‘æ ¼ä¸­,éœ€è¦åŠ å…¥ç¼ºå¤±çš„è¾¹(åŠè¾¹), å¹¶æ³¨å†Œä¹‹
 			else {
 				heHandles[i] = halfedge_handle( add_edge(vhs[j], vhs[i]), 1);
-				//×¢Òâ:ÉÏÃæ¼ÓÈë±ßµÄµÚÒ»Ìõ°ë±ßÎªÈ±Ê§°ë±ß,¶ø·ÇµÚ¶şÌõ°ë±ß!!!!
+				//æ³¨æ„:ä¸Šé¢åŠ å…¥è¾¹çš„ç¬¬ä¸€æ¡åŠè¾¹ä¸ºç¼ºå¤±åŠè¾¹,è€Œéç¬¬äºŒæ¡åŠè¾¹!!!!
 				flags[i] = false;
 			}
-			//ÖÃËùÓĞ°ë±ßµÄÃæÆ¬ºÅ
+			//ç½®æ‰€æœ‰åŠè¾¹çš„é¢ç‰‡å·
 			halfedge_ref(heHandles[i]).facet_handle_ = newFacetHandle;
 		}
 
-		///½¨Á¢ÓëĞÂÌí¼ÓÃæÆ¬Ïà¹ØµÄ°ë±ßÍØÆË¹ØÏµ////////////////
+		///å»ºç«‹ä¸æ–°æ·»åŠ é¢ç‰‡ç›¸å…³çš„åŠè¾¹æ‹“æ‰‘å…³ç³»////////////////
 		for (i=0, j=1; i<3; ++i, j=(j+1)%3) {
-			int   flag(0);  //±ê¼ÇÏà¼ÌÁ½Ìõ°ë±ßµÄ´æÔÚ(ĞÂ/¾É)¹ØÏµ
+			int   flag(0);  //æ ‡è®°ç›¸ç»§ä¸¤æ¡åŠè¾¹çš„å­˜åœ¨(æ–°/æ—§)å…³ç³»
 			Halfedge& he0 = halfedge_ref( heHandles[i] );
 
-			if (!flags[i])  flag |= 1; //Ïà¼Ì°ë±ßµÄ¹ØÏµ
+			if (!flags[i])  flag |= 1; //ç›¸ç»§åŠè¾¹çš„å…³ç³»
 			if (!flags[j])  flag |= 2;
 
 			switch (flag) 	{
-			case 0: { //Á½Ìõ°ë±ß¾ù²»ÊÇ¸Õ¸ÕÉú³ÉµÄ
-				//Èç¹ûÎ»ÖÃ´íÂÒ,µ÷ÕûÖ®
+			case 0: { //ä¸¤æ¡åŠè¾¹å‡ä¸æ˜¯åˆšåˆšç”Ÿæˆçš„
+				//å¦‚æœä½ç½®é”™ä¹±,è°ƒæ•´ä¹‹
 				if ( next_halfedge_handle(heHandles[i]) != heHandles[j] ) {
 					_fix_halfedge_order(heHandles[i], heHandles[j]);
 				}
 				break;
 					}//case 0
 
-			case 1: {//Ç°Ò»Ìõ°ë±ßÊÇĞÂµÄ,ºóÒ»ÌõÊÇÀÏµÄ
+			case 1: {//å‰ä¸€æ¡åŠè¾¹æ˜¯æ–°çš„,åä¸€æ¡æ˜¯è€çš„
 				he0.next_halfedge_handle_ = heHandles[j];
 
 				halfedge_ref(opposite_halfedge_handle(heHandles[i])).prev_halfedge_handle_
@@ -615,11 +615,11 @@ namespace MeshN {
 
 				halfedge_ref(heHandles[j]).prev_halfedge_handle_ = heHandles[i];
 
-				//NOTE:¶¥µã(vhs[i])µÄµÚÒ»Ìõ(±ß½ç)°ë±ß±£³Ö²»±ä!!
+				//NOTE:é¡¶ç‚¹(vhs[i])çš„ç¬¬ä¸€æ¡(è¾¹ç•Œ)åŠè¾¹ä¿æŒä¸å˜!!
 				break;
 					}//case 1
 
-			case 2: {//Ç°Ò»Ìõ°ë±ßÊÇÀÏµÄ, ¶øºóÒ»ÌõÔòÊÇĞÂ½üÉú³ÉµÄ
+			case 2: {//å‰ä¸€æ¡åŠè¾¹æ˜¯è€çš„, è€Œåä¸€æ¡åˆ™æ˜¯æ–°è¿‘ç”Ÿæˆçš„
 				halfedge_ref(heHandles[j]).prev_halfedge_handle_ = heHandles[i];
 
 				halfedge_ref(opposite_halfedge_handle(heHandles[j])).
@@ -630,32 +630,32 @@ namespace MeshN {
 
 				he0.next_halfedge_handle_ = heHandles[j];
 
-				//NOTE: °ë±ß[_opposite_halfedge_handle(heHandles[j])]ÊÇ±ß½ç°ë±ß!!
+				//NOTE: åŠè¾¹[_opposite_halfedge_handle(heHandles[j])]æ˜¯è¾¹ç•ŒåŠè¾¹!!
 				vertex_ref(vhs[i]).halfedge_handle_ 
 					= opposite_halfedge_handle( heHandles[j] );
 				break;
 					}//case 2
 
-			case 3: {//Á½Ìõ°ë±ß¾ùÊÇĞÂ½ü²úÉúµÄ
+			case 3: {//ä¸¤æ¡åŠè¾¹å‡æ˜¯æ–°è¿‘äº§ç”Ÿçš„
 				he0.next_halfedge_handle_ = heHandles[j];
 				halfedge_ref(heHandles[j]).prev_halfedge_handle_ = heHandles[i];
 
 				if ( !halfedge_handle(vhs[i]).is_valid() ) { 
-					//Èç¹û(_vns[i])ÊÇ¹ÂÁ¢¶¥µã
+					//å¦‚æœ(_vns[i])æ˜¯å­¤ç«‹é¡¶ç‚¹
 					halfedge_ref(opposite_halfedge_handle(heHandles[i])).
 						prev_halfedge_handle_ = opposite_halfedge_handle( heHandles[j] );
 
 					halfedge_ref(opposite_halfedge_handle(heHandles[j])).
 						next_halfedge_handle_ = opposite_halfedge_handle( heHandles[i] );
 
-					//Note: °ë±ß[_opposite_halfedge_handle(heHandles[j])]Îª±ß½ç°ë±ß
+					//Note: åŠè¾¹[_opposite_halfedge_handle(heHandles[j])]ä¸ºè¾¹ç•ŒåŠè¾¹
 					vertex_ref(vhs[i]).halfedge_handle_ 
 						= opposite_halfedge_handle( heHandles[j] ); 
 				} else {
-					//·ñÔò,¶¥µã(_vns[i])²»ÊÇ¹ÂÁ¢¶¥µã,Ëü´æÔÚ×ÅÆäËüÁ¬½Ó¹ØÏµ
+					//å¦åˆ™,é¡¶ç‚¹(_vns[i])ä¸æ˜¯å­¤ç«‹é¡¶ç‚¹,å®ƒå­˜åœ¨ç€å…¶å®ƒè¿æ¥å…³ç³»
 					HalfedgeHandle& v_hen = halfedge_handle( vhs[i] ); 
 
-					//Note: ÕâÊ±°ë±ß[vertex_HalfedgeHandle(_vns[i])]Ó¦Îª±ß½ç°ë±ß
+					//Note: è¿™æ—¶åŠè¾¹[vertex_HalfedgeHandle(_vns[i])]åº”ä¸ºè¾¹ç•ŒåŠè¾¹
 					assert( is_boundary_halfedge(v_hen) );
 
 					halfedge_ref(opposite_halfedge_handle(heHandles[j])).
@@ -670,7 +670,7 @@ namespace MeshN {
 					halfedge_ref(opposite_halfedge_handle(heHandles[i])).
 						prev_halfedge_handle_ = v_hen;
 
-					//NOTE:ÕâÊ±¶¥µãµÄµÚÒ»°ë±ßÈÔÎª±ß½ç°ë±ß,ÎŞĞèµ÷Õû
+					//NOTE:è¿™æ—¶é¡¶ç‚¹çš„ç¬¬ä¸€åŠè¾¹ä»ä¸ºè¾¹ç•ŒåŠè¾¹,æ— éœ€è°ƒæ•´
 				}//case 3
 					}//switch
 			}//end of for
@@ -678,7 +678,7 @@ namespace MeshN {
 			_adjust_to_boundary_halfedge(vhs[i]);
 		} 
 
-		//²úÉúĞÂÃæÆ¬,×¢ÒâÆäÖĞµÄ°ë±ßÍØÆË¹ØÏµÃ»ÓĞÍêÈ«È·¶¨ÏÂÀ´
+		//äº§ç”Ÿæ–°é¢ç‰‡,æ³¨æ„å…¶ä¸­çš„åŠè¾¹æ‹“æ‰‘å…³ç³»æ²¡æœ‰å®Œå…¨ç¡®å®šä¸‹æ¥
 		Facet facet;
 		facet.halfedge_handle_ = heHandles[0];
 		facets_.push_back( facet );  
@@ -724,13 +724,13 @@ namespace MeshN {
 	template  <class Items>  void
 		typename KernelT<Items>::
 		_fix_halfedge_order(const HalfedgeHandle& _hh0, const HalfedgeHandle& _hh1) {
-			//½«±»´íÎó·ÅÖÃµÄÁ½ÌõÏà¼Ì°ë±ßµ÷ÕûÎªÕı³£ÁÚ½Ó¹ØÏµ;  ²ÎÊı: Á½ÌõÏà¼ÌµÄ°ë±ßºÅ
+			//å°†è¢«é”™è¯¯æ”¾ç½®çš„ä¸¤æ¡ç›¸ç»§åŠè¾¹è°ƒæ•´ä¸ºæ­£å¸¸é‚»æ¥å…³ç³»;  å‚æ•°: ä¸¤æ¡ç›¸ç»§çš„åŠè¾¹å·
 			HalfedgeHandle  fore_begin,          fore_end(_hh0);
 			HalfedgeHandle  this_begin(_hh1),    this_end;
 			HalfedgeHandle  back_begin(next_halfedge_handle(_hh0));
 			HalfedgeHandle  back_end  (prev_halfedge_handle(_hh1));
 
-			//Çóthis_endºÍfore_begin
+			//æ±‚this_endå’Œfore_begin
 			this_end = opposite_halfedge_handle( this_begin );
 			while ( !is_boundary_halfedge( this_end ) ) {
 				this_end = opposite_halfedge_handle( next_halfedge_handle(this_end) );
@@ -742,11 +742,11 @@ namespace MeshN {
 
 			fore_begin = next_halfedge_handle( this_end );
 
-			//µ÷Õû°ë±ß¹ØÏµ: Ê×ÏÈÕª³ıÖĞ¼äÃæÆ¬
+			//è°ƒæ•´åŠè¾¹å…³ç³»: é¦–å…ˆæ‘˜é™¤ä¸­é—´é¢ç‰‡
 			halfedge_ref(back_end).next_halfedge_handle_   = fore_begin;
 			halfedge_ref(fore_begin).prev_halfedge_handle_ = back_end;
 
-			//ÔÙ½«Õª³ıµÄÖĞ¼äÃæÆ¬²åÈëµ½ÕıÈ·Î»ÖÃ
+			//å†å°†æ‘˜é™¤çš„ä¸­é—´é¢ç‰‡æ’å…¥åˆ°æ­£ç¡®ä½ç½®
 			halfedge_ref(fore_end).next_halfedge_handle_   = this_begin;
 			halfedge_ref(this_begin).prev_halfedge_handle_ = fore_end;
 			halfedge_ref(this_end).next_halfedge_handle_   = back_begin;
@@ -756,7 +756,7 @@ namespace MeshN {
 	}
 
 	////////////////////////////////////////////////////////////////////////////
-	//¾¡¿ÉÄÜ½«¶¥µãµÄµÚÒ»Ìõ°ë±ßµ÷ÕûÎª±ß½çÈë°ë±ß
+	//å°½å¯èƒ½å°†é¡¶ç‚¹çš„ç¬¬ä¸€æ¡åŠè¾¹è°ƒæ•´ä¸ºè¾¹ç•Œå…¥åŠè¾¹
 	template  <class Items> 
 	bool KernelT<Items>::
 		_adjust_to_boundary_halfedge(const VertexHandle& _vh) {

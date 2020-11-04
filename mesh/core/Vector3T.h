@@ -370,7 +370,7 @@ namespace MathN
 	///////////////////////////////////////////////////////////////////////////////
 #define PITOANG  0.0174532925  //
 	///////////////////////////////////////////////////////////////////////////////
-	template <typename T>   //Ò»¸öÏòÁ¿ÈÆ´ËÏòÁ¿Ğı×ª_angle½Ç¶È
+	template <typename T>   //ä¸€ä¸ªå‘é‡ç»•æ­¤å‘é‡æ—‹è½¬_angleè§’åº¦
 	void Vector3T<T>::rotate(Vector& _vec, const T& _angle) {
 		T sinval = (T)sin(_angle*PITOANG);
 		T cosval = (T)cos(_angle*PITOANG);
@@ -386,16 +386,16 @@ namespace MathN
 
 	template <typename T> 
 	void Vector3T<T>::rotatePoint(Vector& _pnt, const T& _angle) {
-		T  k = x*_pnt.x + y*_pnt.y + z*_pnt.z;  //Á½¸öÏòÁ¿µÄµã»ı
+		T  k = x*_pnt.x + y*_pnt.y + z*_pnt.z;  //ä¸¤ä¸ªå‘é‡çš„ç‚¹ç§¯
 
-		Vector  proj (k*x, k*y, k*z);  //Í¶Ó°
-		Vector  vect (_pnt - proj);    //Ğı×ªÖá
+		Vector  proj (k*x, k*y, k*z);  //æŠ•å½±
+		Vector  vect (_pnt - proj);    //æ—‹è½¬è½´
 		T       len = vect.length();   //!!
 
 		vect.normalize();          //!!
 		rotate(vect, _angle);
 
-		vect *= len;//»Ö¸´rµÄ³¤¶È  //!!
+		vect *= len;//æ¢å¤rçš„é•¿åº¦  //!!
 		_pnt  = proj + vect;
 	}
 

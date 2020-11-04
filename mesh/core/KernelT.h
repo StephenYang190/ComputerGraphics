@@ -26,23 +26,23 @@ namespace MeshN {
 		typedef typename KernelT<Items>         This;
 
 		// definitions of non-topologic types
-		typedef typename Items::Scalar          Scalar;//ÊýÁ¿¡¢±êÁ¿
-		typedef typename Items::Coord           Coord;//×ø±ê
-		typedef typename Items::Normal          Normal;//ÏòÁ¿
-		typedef typename Items::Color           Color;//ÑÕÉ«
-		typedef typename Items::TexCoord        TexCoord;//ÎÆÀí×ø±ê
+		typedef typename Items::Scalar          Scalar;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		typedef typename Items::Coord           Coord;//ï¿½ï¿½ï¿½ï¿½
+		typedef typename Items::Normal          Normal;//ï¿½ï¿½ï¿½ï¿½
+		typedef typename Items::Color           Color;//ï¿½ï¿½É«
+		typedef typename Items::TexCoord        TexCoord;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 		// definitions of topologic items
-		typedef typename Items::Halfedge        Halfedge;//°ë±ß
-		typedef typename Items::Vertex          Vertex;//¶¥µã
-		typedef typename Items::Edge            Edge;//Õû±ß
-		typedef typename Items::Facet           Facet;//Ãæ
+		typedef typename Items::Halfedge        Halfedge;//ï¿½ï¿½ï¿½
+		typedef typename Items::Vertex          Vertex;//ï¿½ï¿½ï¿½ï¿½
+		typedef typename Items::Edge            Edge;//ï¿½ï¿½ï¿½ï¿½
+		typedef typename Items::Facet           Facet;//ï¿½ï¿½
 
 		// definitions of various handles
-		typedef typename Items::HalfedgeHandle  HalfedgeHandle;//°ë±ßµÄ¾ä±ú£¬Ïàµ±ÓÚÖ¸Õë
-		typedef typename Items::VertexHandle    VertexHandle;//¶¥µãµÄ¾ä±ú
-		typedef typename Items::EdgeHandle      EdgeHandle;//Õû±ßµÄ¾ä±ú
-		typedef typename Items::FacetHandle     FacetHandle;//ÃæµÄ¾ä±ú
+		typedef typename Items::HalfedgeHandle  HalfedgeHandle;//ï¿½ï¿½ßµÄ¾ï¿½ï¿½ï¿½ï¿½ï¿½àµ±ï¿½ï¿½Ö¸ï¿½ï¿½
+		typedef typename Items::VertexHandle    VertexHandle;//ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½
+		typedef typename Items::EdgeHandle      EdgeHandle;//ï¿½ï¿½ï¿½ßµÄ¾ï¿½ï¿½
+		typedef typename Items::FacetHandle     FacetHandle;//ï¿½ï¿½Ä¾ï¿½ï¿½
 
 		// handle arrays
 		typedef typename std::vector<VertexHandle>   VertexHandles;
@@ -173,7 +173,7 @@ namespace MeshN {
 
 
 	public:
-		inline Scalar get_average_edge_length()const{//È¡Æ½¾ù±ß³¤
+		inline Scalar get_average_edge_length()const{//È¡Æ½ï¿½ï¿½ï¿½ß³ï¿½
 
 			return averaged_edge_length_;
 		}
@@ -185,13 +185,13 @@ namespace MeshN {
 		}
 
 	public:
-		inline void set_average_edge_length(Scalar _edgelength){averaged_edge_length_ = _edgelength;}//ÉèÖÃÆ½¾ù±ß³¤
-		inline void setMeshBox(const Coord& _min, const Coord& _max){//ÉèÖÃÍø¸ñ°üÎ§Çò
+		inline void set_average_edge_length(Scalar _edgelength){averaged_edge_length_ = _edgelength;}//ï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½ï¿½ß³ï¿½
+		inline void setMeshBox(const Coord& _min, const Coord& _max){//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î§ï¿½ï¿½
 			max_ = _max;
 			min_ = _min;
 		}
 
-		inline bool calcMeshBox();//¼ÆËãÍø¸ñ°üÎ§Çò
+		inline bool calcMeshBox();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î§ï¿½ï¿½
 
 	public: // Data body  
 		std::vector<Vertex>  vertices_;
@@ -199,8 +199,8 @@ namespace MeshN {
 		std::vector<Facet>   facets_;
 
 	private:
-		Scalar averaged_edge_length_;//Æ½¾ù±ß³¤
-		Coord min_, max_;///°üÎ§Çò×îÐ¡×î´ó×ø±ê
+		Scalar averaged_edge_length_;//Æ½ï¿½ï¿½ï¿½ß³ï¿½
+		Coord min_, max_;///ï¿½ï¿½Î§ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	}; 
 
 

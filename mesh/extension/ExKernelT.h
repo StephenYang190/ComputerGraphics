@@ -9,7 +9,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 //#include "../core/KernelT.h" 
 #include "../core/KernelT.cpp" 
-//#include "kdtree\KdTree.h"//ÓÃÓÚËÑË÷½üÁÚµã£¬Ê±¼ä¸´ÔÓ¶ÈÎª(nlogn)
+//#include "kdtree\KdTree.h"//ç”¨äºæœç´¢è¿‘é‚»ç‚¹ï¼Œæ—¶é—´å¤æ‚åº¦ä¸º(nlogn)
 //#include "pointset\PointSet.h"
 //#include "NumericalC\simMatrix4.h"
 //#include "NumericalC\jacobi.h"
@@ -59,13 +59,13 @@ namespace MeshN {
 
 	public:
 		
-		Scalar calc_facet_area(const FacetHandle& _fh);//¸ø¶¨Ò»¸öÈı½ÇÃæÆ¬£¬¼ÆËãËüµÄÃæ»ı, 
+		Scalar calc_facet_area(const FacetHandle& _fh);//ç»™å®šä¸€ä¸ªä¸‰è§’é¢ç‰‡ï¼Œè®¡ç®—å®ƒçš„é¢ç§¯, 
 
-		inline Normal calc_normal(const VertexHandle& _vh);//////¼ÆËã¶¥µãµÄ·¨ÏòÖµ
+		inline Normal calc_normal(const VertexHandle& _vh);//////è®¡ç®—é¡¶ç‚¹çš„æ³•å‘å€¼
 
-		void Laplacian_Smoothing();/////////////////////////////////////////////////ÊµÏÖÒ»ÖÖÈı½ÇÍø¸ñÈ¥ÔëËã·¨
+		void Laplacian_Smoothing();/////////////////////////////////////////////////å®ç°ä¸€ç§ä¸‰è§’ç½‘æ ¼å»å™ªç®—æ³•
 
-		void mesh_process();///////////////////////////////////////////////////////(¿ÉÑ¡£¬ÔÚÈı½ÇÍø¸ñÉÏÊµÏÖÒ»ÖÖ²Ù×÷£¬ÀıÈçÌØÕ÷ÌáÈ¡£¬Íø¸ñ·Ö¸î£¬Èı½ÇÍø¸ñ±äĞÎµÈµÈ)
+		void mesh_process();///////////////////////////////////////////////////////(å¯é€‰ï¼Œåœ¨ä¸‰è§’ç½‘æ ¼ä¸Šå®ç°ä¸€ç§æ“ä½œï¼Œä¾‹å¦‚ç‰¹å¾æå–ï¼Œç½‘æ ¼åˆ†å‰²ï¼Œä¸‰è§’ç½‘æ ¼å˜å½¢ç­‰ç­‰)
 		
 
 	public: 
@@ -80,15 +80,15 @@ namespace MeshN {
 
 		inline Normal calc_normal_max(const VertexHandle& _vh);
 		
-		void   update_vertex_normals(void);//////¼ÆËãËùÓĞ¶¥µãµÄ·¨ÏòÖµ
+		void   update_vertex_normals(void);//////è®¡ç®—æ‰€æœ‰é¡¶ç‚¹çš„æ³•å‘å€¼
 
 		void   update_vertex_normals_max(void);
 
-		void   update_area();/////¼ÆËãËùÓĞÈı½ÇÃæÆ¬µÄÃæ»ı
+		void   update_area();/////è®¡ç®—æ‰€æœ‰ä¸‰è§’é¢ç‰‡çš„é¢ç§¯
 		Scalar get_area(const FacetHandle& _fh);
 
 
-		Coord calc_centroid(const FacetHandle& _fh);//¼ÆËãÈı½ÇÃæÆ¬µÄÖØĞÄ
+		Coord calc_centroid(const FacetHandle& _fh);//è®¡ç®—ä¸‰è§’é¢ç‰‡çš„é‡å¿ƒ
 
 		void   update_normals(void);
 
@@ -97,7 +97,7 @@ namespace MeshN {
 		void update_edge_length(void);
 
 		void output_to_file();
-		void getNeighborRing(VertexHandle& _vh, int _ring, std::vector<VertexHandle>& _vhs);//È¡¶¥µãµÄring »·µÄËùÓĞµã
+		void getNeighborRing(VertexHandle& _vh, int _ring, std::vector<VertexHandle>& _vhs);//å–é¡¶ç‚¹çš„ring ç¯çš„æ‰€æœ‰ç‚¹
 		void getNeighborFaceN1(FacetHandle& _fh, std::vector<FacetHandle>& _fhs);//getting faces sharing edges with _fh
 		void getNeighborFaceN2(FacetHandle& _fh, std::vector<FacetHandle>& _fhs);//getting faces sharing common vertices with _fh
 
@@ -105,8 +105,8 @@ namespace MeshN {
 
 
 
-///////////////ÒÔÏÂÎªÁ½ÖÖÈı½ÇÍø¸ñÈ¥ÔëËã·¨//////////////////////////////////////////////
-		void adjustFaceNormal_FE();//¸ù¾İSun Xianfang TVCG2007·½·¨µ÷ÕûÃæ·¨Ïò
+///////////////ä»¥ä¸‹ä¸ºä¸¤ç§ä¸‰è§’ç½‘æ ¼å»å™ªç®—æ³•//////////////////////////////////////////////
+		void adjustFaceNormal_FE();//æ ¹æ®Sun Xianfang TVCG2007æ–¹æ³•è°ƒæ•´é¢æ³•å‘
 		void adjustFaceNormal_YouyiZheng();//Based on Youyi Zheng TVCG 2011
 
 		void Mesh_Denoising_FE();//Xianfang Sun, TVCG2007, fast and effective feature-preserving mesh denoising
@@ -116,7 +116,7 @@ namespace MeshN {
 
 		void meshInit();
 	public:
-		// ÆäËü³ÉÔ±º¯Êı¼ÓÔÚ´Ë´¦
+		// å…¶å®ƒæˆå‘˜å‡½æ•°åŠ åœ¨æ­¤å¤„
 
 		bool has_Normal(){return isNormal_;}
 		void set_isNormal(bool tf){isNormal_ = tf;}

@@ -28,9 +28,9 @@ namespace MeshN {
 	template<class ExItems>
 	void ExKernelT<ExItems>::meshInit(){
 
-		update_facet_normals();//��������������Ƭ�ķ���
+		update_facet_normals();//计算所有三角面片的法向
 		update_area();
-		update_edge_length();//������������ı߳�?
+		update_edge_length();//计算所有网格的边长
 
 
 	}
@@ -40,38 +40,40 @@ namespace MeshN {
 	template<class ExItems>
 	void ExKernelT<ExItems>::Laplacian_Smoothing(){
 
-		/////��ʵ���Լ���ȥ���㷨////////
+		/////请实现自己的去噪算法////////
 	}
 
 ////////////////////////////////////////////////////////////////////////////////////
 	template<class ExItems>
-	void ExKernelT<ExItems>::mesh_process(){///////(��ѡ��������������ʵ��һ�ֲ���������������ȡ������ָ����������εȵ�)
+	void ExKernelT<ExItems>::mesh_process(){///////(可选，在三角网格上实现一种操作，例如特征提取，网格分割，三角网格变形等等)
 
 	}
 
 ////////////////////////////////////////////////////////////////////////////////////
 	template<class ExItems>
 	typename ExKernelT<ExItems>::Scalar
-		ExKernelT<ExItems>::calc_facet_area(const FacetHandle& _fh){/////���������ε����?
+		ExKernelT<ExItems>::calc_facet_area(const FacetHandle& _fh){/////计算三角形的面积
 
-			///�õ���߾��
+			///得到半边句柄
 			HalfedgeHandle he1 = halfedge_handle(_fh);
 			HalfedgeHandle he2 = next_halfedge_handle(he1);
 			HalfedgeHandle he3 = prev_halfedge_handle(he1);
 
-			////�ɰ�߾���õ��߾��?
+			////由半边句柄得到边句柄
 			EdgeHandle eh1 = edge_handle(he1);
 			EdgeHandle eh2 = edge_handle(he2);
 			EdgeHandle eh3 = edge_handle(he3);
 
-			////�ɱ߾���õ����߳�?
+			////由边句柄得到各边长
 			Scalar el1 = calc_edge_length(eh1);
 			Scalar el2 = calc_edge_length(eh2);
 			Scalar el3 = calc_edge_length(eh3);
 
-			////���ú��׹�ʽ�����s=sqrt(p(p-a)(p-b)(p-c))
+			////利用海伦公式求面积s=sqrt(p(p-a)(p-b)(p-c))
 			Scalar avr = (el1 + el2 + el3) / 2;
 			Scalar area = sqrt(avr * (avr - el1)* (avr - el2)* (avr - el3));
+
+
 
 			facet_ref(_fh).area_ = area;
 			return area;
@@ -79,7 +81,7 @@ namespace MeshN {
 
 	//////////////////////////////////////////////////////////////////////////////
 	template<class ExItems>
-	void ExKernelT<ExItems>::update_area()//��������������Ƭ�����?
+	void ExKernelT<ExItems>::update_area()//计算所有三角面片的面积
 	{   
 		set_isArea(true);
 		Scalar max_area = 0.0;
@@ -122,7 +124,7 @@ namespace MeshN {
 
 	template<class ExItems>
 	void
-		ExKernelT<ExItems>::getNeighborRing(VertexHandle& _vh, int _ring, std::vector<VertexHandle>& NeighborRing){//�õ���ring���ڽӵ�
+		ExKernelT<ExItems>::getNeighborRing(VertexHandle& _vh, int _ring, std::vector<VertexHandle>& NeighborRing){//得到第ring环邻接点
 
 			NeighborRing.push_back( _vh );
 			int iteration = 0;
@@ -279,7 +281,7 @@ namespace MeshN {
 			const Coord& cd2 = coord( vertex_handle(n_hh) );
 
 			//return ((cd1-cd0)%(cd2-cd1)).normalize();
-			return ((cd2-cd1)%(cd1-cd0)).normalize();//����������˲��ҵ�λ��? be careful
+			return ((cd2-cd1)%(cd1-cd0)).normalize();//两个向量叉乘并且单位化 be careful
 	}
 
 
@@ -312,15 +314,33 @@ namespace MeshN {
 ///////////////////////////////////////////////////////////////////////////////
 	template <class ExItems> 
 	typename ExKernelT<ExItems>::Normal
-		ExKernelT<ExItems>::calc_normal(const VertexHandle& _vh) {////����һ������ķ���?
+		ExKernelT<ExItems>::calc_normal(const VertexHandle& _vh) {////更新一个顶点的法向
 			assert( _vh.is_valid());
 			assert( _vh.idx() < vertex_size() );
 
-			Normal          norm(1,1,1);///////��norm�洢��õķ����?
+			Normal          norm(1,1,1);///////用norm存储求得的法向值
 
-//////////////////////////�ڴ�ʵ��////////////////////////////////////
-
-
+//////////////////////////在此实现////////////////////////////////////
+			//get the 1st iter arround vertexs and halfedges and facets
+			VertexHandles vertex_srr;
+			FacetHandles ft_srr;
+			vector<HalfedgeHandle> he_srr;
+			
+			HalfedgeHandle he = halfedge_handle(_vh);
+			HalfedgeHandle last_he = he;
+			while(last_he != he)
+			{
+				HalfedgeHandle nhe = next_halfedge_handle(last_he);
+				vertex_srr.append(vertex_handle(nhe));
+				last_he = opposite_halfedge_handle(nhe);	
+				he_srr.append(last_he);
+				ft_srr.append(facet_handle(last_he));
+			}
+			//calculate normal of facets around this vertex
+			for(FacetIterator fct = ft_srr.begin(); ft_srr < ft_srr.end();fct++)
+			{
+				facet_norm = calc_normal(*fct);
+			}
 
 /////////////////////////////////////////////////////////////////////
 
@@ -330,7 +350,7 @@ namespace MeshN {
 
 ///////////////////////////////////////////////////////////////////////////////
 	template <class ExItems> 
-	void ExKernelT<ExItems>::update_vertex_normals(void) {//�������ж���ķ���?
+	void ExKernelT<ExItems>::update_vertex_normals(void) {//更新所有顶点的法向
 		VertexIterator vi = vertex_begin();
 
 		for ( ; vi!=vertex_end(); ++vi) {
@@ -372,8 +392,8 @@ namespace MeshN {
 
 					float weight = vec12cross.length() / (vec1.sqLength() * vec2.sqLength() );
 
-					n += facet_ref(fh).normal_ * weight;//---------------------------------------ע��
-					//n += calc_normal(fh);//---------------------------------ע��
+					n += facet_ref(fh).normal_ * weight;//---------------------------------------注意
+					//n += calc_normal(fh);//---------------------------------注意
 
 				}//if
 
@@ -410,7 +430,7 @@ namespace MeshN {
 
 	///////////////////////////////////////////////////////////////////////////////
 	template <class ExItems> 
-	void ExKernelT<ExItems>::update_edge_length(void) {//���������б߳���Ϣ
+	void ExKernelT<ExItems>::update_edge_length(void) {//计算网格中边长信息
 		float global_max_edge_length_ = 0;
 		float averagedlength = 0.0;
 
@@ -455,7 +475,7 @@ namespace MeshN {
 
 	//	unsigned int NumFacet = facet_size();
 
-	//	ps_ = new PointSet(NumFacet);//��ʼ��
+	//	ps_ = new PointSet(NumFacet);//初始化
 
 	//	FacetIterator fi = facet_begin();
 	//	unsigned int i = 0;
@@ -499,9 +519,9 @@ namespace MeshN {
 			std::cin>>T;
 
 			int iteration;
-			std::cout<<"Input facenormal filtering numbers (5-20��): ";
+			std::cout<<"Input facenormal filtering numbers (5-20次): ";
 			std::cin>>iteration;
-			std::cout << "���ڵ������ȽϺ�ʱ��"<<std::endl;
+			std::cout << "由于迭代，比较耗时！"<<std::endl;
 			std::cout << "Please wait.....  "<<std::endl;
 			int i = 0, j = 0;
 			clock_t t1 = clock();
@@ -579,9 +599,9 @@ namespace MeshN {
 
 			int vertex_num = vertex_size();
 			int iterations;
-			std::cout<<"Input vertex update iterations (10-30��): ";
+			std::cout<<"Input vertex update iterations (10-30次): ";
 			std::cin>>iterations;
-			std::cout << "���ڵ������ȽϺ�ʱ��" << std::endl;
+			std::cout << "由于迭代，比较耗时！" << std::endl;
 			std::cout << "Please wait.....  " << std::endl;
 			int i = 0;
 
@@ -644,10 +664,10 @@ namespace MeshN {
 
 			}//for
 
-			std::cout<<"Input facet normal filtering iteration numbers (5-20��): ";
+			std::cout<<"Input facet normal filtering iteration numbers (5-20次): ";
 			int num;//the iteration num
 			std::cin>>num;
-			std::cout << "���ڵ������ȽϺ�ʱ��" << std::endl;
+			std::cout << "由于迭代，比较耗时！" << std::endl;
 			std::cout << "Please wait.....  " << std::endl;
 
 			clock_t t1 = clock();
@@ -708,10 +728,10 @@ namespace MeshN {
 
 			int vertex_num = vertex_size();
 			int iterations;
-			std::cout<<"Input vertex update iterations(5-30��): ";
+			std::cout<<"Input vertex update iterations(5-30次): ";
 			std::cin>>iterations;
 			int i = 0;
-			std::cout << "���ڵ������ȽϺ�ʱ��" << std::endl;
+			std::cout << "由于迭代，比较耗时！" << std::endl;
 			std::cout << "Please wait.....  " << std::endl;
 			clock_t t1 = clock();
 			do{

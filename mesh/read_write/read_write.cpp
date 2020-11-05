@@ -141,6 +141,19 @@ namespace MeshN {
 
 				cshh = fit->halfedge_handle_;
 				FacetHandle fh = mesh_->facet_handle(cshh);
+				Mesh::Normal fct_norm = fit->normal_;
+
+				//calculate the centroid
+				HalfedgeHandle& hh = mesh_->halfedge_handle(fh);
+				HalfedgeHandle& n_hh = mesh_->next_halfedge_handle(hh);
+				HalfedgeHandle& pre_hh = mesh_->prev_halfedge_handle(hh);
+
+				VertexHandle& vh1 = mesh_->vertex_handle(hh);
+				VertexHandle& vh2 = mesh_->vertex_handle(n_hh);
+				VertexHandle& vh3 = mesh_->vertex_handle(pre_hh);
+
+				Mesh::Coord fct_centr = (mesh_->coord(vh1) + mesh_->coord(vh2)+ mesh_->coord(vh3) )/3.0;
+			
 				const VertexHandle& vh0 = mesh_->vertex_handle(cshh);
 				glBegin(GL_TRIANGLES); 
 				do {
@@ -150,6 +163,13 @@ namespace MeshN {
 					glVertex3fv( mesh_->coord(vh) );
 					cshh = mesh_->next_halfedge_handle(cshh);
 				} while ( cshh != fit->halfedge_handle_ );
+				glEnd();
+
+				glBegin(GL_LINES); 
+				glVertex3fv(fct_centr);
+				glVertex3fv(fct_centr + fct_norm);
+				float ff = fct_norm[0] * fct_norm[0] + fct_norm[1] * fct_norm[1] + fct_norm[2] * fct_norm[2];
+				std::cout << ff << std::endl;
 				glEnd();
 			}
 

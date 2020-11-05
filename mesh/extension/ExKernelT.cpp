@@ -520,9 +520,8 @@ namespace MeshN {
 			std::cin>>T;
 
 			int iteration;
-			std::cout<<"Input facenormal filtering numbers (5-20次): ";
+			std::cout<<"Input facenormal filtering numbers (5-20 times): ";
 			std::cin>>iteration;
-			std::cout << "由于迭代，比较耗时!"<<std::endl;
 			std::cout << "Please wait.....  "<<std::endl;
 			int i = 0, j = 0;
 			clock_t t1 = clock();
@@ -600,9 +599,8 @@ namespace MeshN {
 
 			int vertex_num = vertex_size();
 			int iterations;
-			std::cout<<"Input vertex update iterations (10-30次): ";
+			std::cout<<"Input vertex update iterations (10-30 times): ";
 			std::cin>>iterations;
-			std::cout << "由于迭代，比较耗时!" << std::endl;
 			std::cout << "Please wait.....  " << std::endl;
 			int i = 0;
 
@@ -665,10 +663,9 @@ namespace MeshN {
 
 			}//for
 
-			std::cout<<"Input facet normal filtering iteration numbers (5-20次): ";
+			std::cout<<"Input facet normal filtering iteration numbers (5-20 times): ";
 			int num;//the iteration num
-			std::cin>>num;
-			std::cout << "由于迭代，比较耗时!" << std::endl;
+			std::cin>>num;			
 			std::cout << "Please wait.....  " << std::endl;
 
 			clock_t t1 = clock();
@@ -729,10 +726,9 @@ namespace MeshN {
 
 			int vertex_num = vertex_size();
 			int iterations;
-			std::cout<<"Input vertex update iterations(5-30次): ";
+			std::cout<<"Input vertex update iterations(5-30 times): ";
 			std::cin>>iterations;
-			int i = 0;
-			std::cout << "由于迭代，比较耗时!" << std::endl;
+			int i = 0;			
 			std::cout << "Please wait.....  " << std::endl;
 			clock_t t1 = clock();
 			do{

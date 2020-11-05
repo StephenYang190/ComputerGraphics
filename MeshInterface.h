@@ -58,11 +58,11 @@ void MyMeshInit(void) { //
 ///////////////////三角网格去噪////////////////////////
 
 		int choice;
-		std::cout << "请选择一种去噪方法" << std::endl;
-		std::cout << "数字 1 代表 Xianfang Sun 发表在 TVCG 上2007年的方法" << std::endl;
-		std::cout << "数字 2 代表 Youyi Zheng 发表在 TVCG 上2011年的方法" << std::endl;
-		std::cout << "数字 3 代表 你自己实现的某一种去噪方法" << std::endl;
-		std::cout << "请输入数字(1-3): " << std::endl;
+		std::cout << "select a denoising approach" << std::endl;
+		std::cout << "number 1 present Xianfang Sun on TVCG 2007" << std::endl;
+		std::cout << "number 2 present Youyi Zheng on TVCG 2011" << std::endl;
+		std::cout << "number 3 present your method" << std::endl;
+		std::cout << "input number(1-3): " << std::endl;
 		std::cin >> choice;
 		if (choice == 1)
 			mesh.Mesh_Denoising_FE();//Sun et al.
@@ -70,8 +70,8 @@ void MyMeshInit(void) { //
 			mesh.Mesh_Denoising_YouyiZheng();
 		else if (choice == 3)
 			mesh.Laplacian_Smoothing();
-		std::cout << "去噪执行完毕!!!" << std::endl;
-		std::cout << "按 b 可以查看去噪结果" << std::endl;
+		std::cout << "Finish!!!" << std::endl;
+		std::cout << "Press b to show the result of denoising" << std::endl;
 
 
 	glNewList(24, GL_COMPILE);

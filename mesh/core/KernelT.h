@@ -26,23 +26,23 @@ namespace MeshN {
 		typedef typename KernelT<Items>         This;
 
 		// definitions of non-topologic types
-		typedef typename Items::Scalar          Scalar;//����������
-		typedef typename Items::Coord           Coord;//����
-		typedef typename Items::Normal          Normal;//����
-		typedef typename Items::Color           Color;//��ɫ
-		typedef typename Items::TexCoord        TexCoord;//��������
+		typedef typename Items::Scalar          Scalar;//锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
+		typedef typename Items::Coord           Coord;//锟斤拷锟斤拷
+		typedef typename Items::Normal          Normal;//锟斤拷锟斤拷
+		typedef typename Items::Color           Color;//锟斤拷色
+		typedef typename Items::TexCoord        TexCoord;//锟斤拷锟斤拷锟斤拷锟斤拷
 
 		// definitions of topologic items
-		typedef typename Items::Halfedge        Halfedge;//���
-		typedef typename Items::Vertex          Vertex;//����
-		typedef typename Items::Edge            Edge;//����
-		typedef typename Items::Facet           Facet;//��
+		typedef typename Items::Halfedge        Halfedge;//锟斤拷锟�
+		typedef typename Items::Vertex          Vertex;//锟斤拷锟斤拷
+		typedef typename Items::Edge            Edge;//锟斤拷锟斤拷
+		typedef typename Items::Facet           Facet;//锟斤拷
 
 		// definitions of various handles
-		typedef typename Items::HalfedgeHandle  HalfedgeHandle;//��ߵľ�����൱��ָ��
-		typedef typename Items::VertexHandle    VertexHandle;//����ľ��
-		typedef typename Items::EdgeHandle      EdgeHandle;//���ߵľ��
-		typedef typename Items::FacetHandle     FacetHandle;//��ľ��
+		typedef typename Items::HalfedgeHandle  HalfedgeHandle;//锟斤拷叩木锟斤拷锟斤拷锟洁当锟斤拷指锟斤拷
+		typedef typename Items::VertexHandle    VertexHandle;//锟斤拷锟斤拷木锟斤拷
+		typedef typename Items::EdgeHandle      EdgeHandle;//锟斤拷锟竭的撅拷锟�
+		typedef typename Items::FacetHandle     FacetHandle;//锟斤拷木锟斤拷
 
 		// handle arrays
 		typedef typename std::vector<VertexHandle>   VertexHandles;
@@ -173,7 +173,7 @@ namespace MeshN {
 
 
 	public:
-		inline Scalar get_average_edge_length()const{//ȡƽ���߳�
+		inline Scalar get_average_edge_length()const{//取平锟斤拷锟竭筹拷
 
 			return averaged_edge_length_;
 		}
@@ -185,13 +185,13 @@ namespace MeshN {
 		}
 
 	public:
-		inline void set_average_edge_length(Scalar _edgelength){averaged_edge_length_ = _edgelength;}//����ƽ���߳�
-		inline void setMeshBox(const Coord& _min, const Coord& _max){//���������Χ��
+		inline void set_average_edge_length(Scalar _edgelength){averaged_edge_length_ = _edgelength;}//锟斤拷锟斤拷平锟斤拷锟竭筹拷
+		inline void setMeshBox(const Coord& _min, const Coord& _max){//锟斤拷锟斤拷锟斤拷锟斤拷锟轿э拷锟�
 			max_ = _max;
 			min_ = _min;
 		}
 
-		inline bool calcMeshBox();//���������Χ��
+		inline bool calcMeshBox();//锟斤拷锟斤拷锟斤拷锟斤拷锟轿э拷锟�
 
 	public: // Data body  
 		std::vector<Vertex>  vertices_;
@@ -199,8 +199,8 @@ namespace MeshN {
 		std::vector<Facet>   facets_;
 
 	private:
-		Scalar averaged_edge_length_;//ƽ���߳�
-		Coord min_, max_;///��Χ����С�������
+		Scalar averaged_edge_length_;//平锟斤拷锟竭筹拷
+		Coord min_, max_;///锟斤拷围锟斤拷锟斤拷小锟斤拷锟斤拷锟斤拷锟�
 	}; 
 
 

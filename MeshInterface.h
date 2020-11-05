@@ -42,27 +42,27 @@ void MyMeshInit(void) { //
 	reader.off_reader( totalmodelname.c_str() );
 	mesh.meshInit();
 	
-/////////////Ä£ĞÍÏÔÊ¾/////////////////////
+/////////////æ¨¡å‹æ˜¾ç¤º/////////////////////
 	 	glNewList(23, GL_COMPILE); 
 	    reader.ogl_writer(0, 1); 
 	 	glEndList();
 ///////////////////////////////////////////////
 
-///////////////ÏÔÊ¾Ä£ĞÍºÍÃæÆ¬·¨Ïò////////////////
+///////////////æ˜¾ç¤ºæ¨¡å‹å’Œé¢ç‰‡æ³•å‘////////////////
 
 		glNewList(25, GL_COMPILE);
 		reader.ogl_writer2(0, 1);
 		glEndList();
 //////////////////////////////////////////////
 
-///////////////////Èı½ÇÍø¸ñÈ¥Ôë////////////////////////
+///////////////////ä¸‰è§’ç½‘æ ¼å»å™ª////////////////////////
 
 		int choice;
-		std::cout << "ÇëÑ¡ÔñÒ»ÖÖÈ¥Ôë·½·¨" << std::endl;
-		std::cout << "Êı×Ö 1 ´ú±í Xianfang Sun ·¢±íÔÚ TVCG ÉÏ2007ÄêµÄ·½·¨" << std::endl;
-		std::cout << "Êı×Ö 2 ´ú±í Youyi Zheng ·¢±íÔÚ TVCG ÉÏ2011ÄêµÄ·½·¨" << std::endl;
-		std::cout << "Êı×Ö 3 ´ú±í Äã×Ô¼ºÊµÏÖµÄÄ³Ò»ÖÖÈ¥Ôë·½·¨" << std::endl;
-		std::cout << "ÇëÊäÈëÊı×Ö(1-3): " << std::endl;
+		std::cout << "è¯·é€‰æ‹©ä¸€ç§å»å™ªæ–¹æ³•" << std::endl;
+		std::cout << "æ•°å­— 1 ä»£è¡¨ Xianfang Sun å‘è¡¨åœ¨ TVCG ä¸Š2007å¹´çš„æ–¹æ³•" << std::endl;
+		std::cout << "æ•°å­— 2 ä»£è¡¨ Youyi Zheng å‘è¡¨åœ¨ TVCG ä¸Š2011å¹´çš„æ–¹æ³•" << std::endl;
+		std::cout << "æ•°å­— 3 ä»£è¡¨ ä½ è‡ªå·±å®ç°çš„æŸä¸€ç§å»å™ªæ–¹æ³•" << std::endl;
+		std::cout << "è¯·è¾“å…¥æ•°å­—(1-3): " << std::endl;
 		std::cin >> choice;
 		if (choice == 1)
 			mesh.Mesh_Denoising_FE();//Sun et al.
@@ -70,8 +70,8 @@ void MyMeshInit(void) { //
 			mesh.Mesh_Denoising_YouyiZheng();
 		else if (choice == 3)
 			mesh.Laplacian_Smoothing();
-		std::cout << "È¥ÔëÖ´ĞĞÍê±Ï!!!" << std::endl;
-		std::cout << "°´ b ¿ÉÒÔ²é¿´È¥Ôë½á¹û" << std::endl;
+		std::cout << "å»å™ªæ‰§è¡Œå®Œæ¯•!!!" << std::endl;
+		std::cout << "æŒ‰ b å¯ä»¥æŸ¥çœ‹å»å™ªç»“æœ" << std::endl;
 
 
 	glNewList(24, GL_COMPILE);

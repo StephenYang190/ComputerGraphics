@@ -16,7 +16,7 @@ namespace MeshN {
 		struct Vertex : public MeshN::InternalItems::Vertex {  
 			Normal   normal_; 
 
-			//ÔÚ´Ë¼ÓÆäËüĞèÒªµÄ¶¥µãÊôĞÔ
+			//åœ¨æ­¤åŠ å…¶å®ƒéœ€è¦çš„é¡¶ç‚¹å±æ€§
 		};
 
 
@@ -24,16 +24,16 @@ namespace MeshN {
 		struct Edge : public MeshN::InternalItems::Edge {
 			Scalar   length_;
 
-			//ÔÚ´Ë¼ÓÆäËüĞèÒªµÄ±ßÊôĞÔ
+			//åœ¨æ­¤åŠ å…¶å®ƒéœ€è¦çš„è¾¹å±æ€§
 		};
 
 
 		///===================================================
 		struct Facet : public MeshN::InternalItems::Facet {
 
-			Normal         normal_;//Èı½ÇĞÎ·¨Ïò 
-			Coord          centroid_;//Èı½ÇĞÎÖØĞÄ
-			Scalar         area_;//Èı½ÇĞÎÃæ»ı
+			Normal         normal_;//ä¸‰è§’å½¢æ³•å‘ 
+			Coord          centroid_;//ä¸‰è§’å½¢é‡å¿ƒ
+			Scalar         area_;//ä¸‰è§’å½¢é¢ç§¯
 			//add others
 
 		}; 

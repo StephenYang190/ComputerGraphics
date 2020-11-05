@@ -21,7 +21,7 @@
 #include <iostream>
 /////////////////////////////////////////////////////////////////////////////// 
 #include <iostream>
-#include "MeshInterface.h"   ///<<<===========½çÃæ/¹¦ÄÜ¸öÐÔ»¯ 
+#include "MeshInterface.h"   ///<<<===========ç•Œé¢/åŠŸèƒ½ä¸ªæ€§åŒ– 
 
 
 //using namespace ViewerN;
@@ -60,7 +60,7 @@ int main(int argc, char *argv[]) {
 	glutIdleFunc(ViewerN::idle);
 	glutKeyboardFunc(ViewerN::keyboard);
 
-	MyMeshInit();///ÀïÃæ¼ÓÔØ¸÷ÖÖº¯Êý¶ÔÍø¸ñÄ£ÐÍ½øÐÐ´¦Àí
+	MyMeshInit();///é‡Œé¢åŠ è½½å„ç§å‡½æ•°å¯¹ç½‘æ ¼æ¨¡åž‹è¿›è¡Œå¤„ç†
 
 	glutMainLoop();
 

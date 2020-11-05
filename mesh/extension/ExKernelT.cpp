@@ -318,29 +318,30 @@ namespace MeshN {
 			assert( _vh.is_valid());
 			assert( _vh.idx() < vertex_size() );
 
-			Normal          norm(1,1,1);///////用norm存储求得的法向值
+			Normal          norm(0, 0, 0);///////用norm存储求得的法向值
 
 //////////////////////////在此实现////////////////////////////////////
 			//get the 1st iter arround vertexs and halfedges and facets
 			VertexHandles vertex_srr;
 			FacetHandles ft_srr;
-			vector<HalfedgeHandle> he_srr;
+			std::vector<HalfedgeHandle> he_srr;
 			
 			HalfedgeHandle he = halfedge_handle(_vh);
 			HalfedgeHandle last_he = he;
 			while(last_he != he)
 			{
 				HalfedgeHandle nhe = next_halfedge_handle(last_he);
-				vertex_srr.append(vertex_handle(nhe));
+				vertex_srr.push_back(vertex_handle(nhe));
 				last_he = opposite_halfedge_handle(nhe);	
-				he_srr.append(last_he);
-				ft_srr.append(facet_handle(last_he));
+				he_srr.push_back(last_he);
+				ft_srr.push_back(facet_handle(last_he));
 			}
 			//calculate normal of facets around this vertex
-			for(FacetIterator fct = ft_srr.begin(); ft_srr < ft_srr.end();fct++)
+			for(int i = 0; i < ft_srr.size();i++)
 			{
-				facet_norm = calc_normal(*fct);
+				norm += calc_normal(ft_srr[i]);
 			}
+
 
 /////////////////////////////////////////////////////////////////////
 
@@ -521,7 +522,7 @@ namespace MeshN {
 			int iteration;
 			std::cout<<"Input facenormal filtering numbers (5-20次): ";
 			std::cin>>iteration;
-			std::cout << "由于迭代，比较耗时！"<<std::endl;
+			std::cout << "由于迭代，比较耗时!"<<std::endl;
 			std::cout << "Please wait.....  "<<std::endl;
 			int i = 0, j = 0;
 			clock_t t1 = clock();
@@ -601,7 +602,7 @@ namespace MeshN {
 			int iterations;
 			std::cout<<"Input vertex update iterations (10-30次): ";
 			std::cin>>iterations;
-			std::cout << "由于迭代，比较耗时！" << std::endl;
+			std::cout << "由于迭代，比较耗时!" << std::endl;
 			std::cout << "Please wait.....  " << std::endl;
 			int i = 0;
 
@@ -667,7 +668,7 @@ namespace MeshN {
 			std::cout<<"Input facet normal filtering iteration numbers (5-20次): ";
 			int num;//the iteration num
 			std::cin>>num;
-			std::cout << "由于迭代，比较耗时！" << std::endl;
+			std::cout << "由于迭代，比较耗时!" << std::endl;
 			std::cout << "Please wait.....  " << std::endl;
 
 			clock_t t1 = clock();
@@ -731,7 +732,7 @@ namespace MeshN {
 			std::cout<<"Input vertex update iterations(5-30次): ";
 			std::cin>>iterations;
 			int i = 0;
-			std::cout << "由于迭代，比较耗时！" << std::endl;
+			std::cout << "由于迭代，比较耗时!" << std::endl;
 			std::cout << "Please wait.....  " << std::endl;
 			clock_t t1 = clock();
 			do{

@@ -1,4 +1,3 @@
-
 #ifndef __WMQ_MESH_EXTENSION_KERNEL_H__
 #define __WMQ_MESH_EXTENSION_KERNEL_H__
 

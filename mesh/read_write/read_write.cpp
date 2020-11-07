@@ -103,28 +103,6 @@ namespace MeshN {
 	///////////////////////////////////////////////////////////////////////////// 
 	template <class Mesh>
 	bool ReaderWriterT<Mesh>::ogl_writer2(bool _orient, bool _smooth){////在里面把三角面片法向画出
-		// HalfedgeHandle       cshh;
-		// Mesh::FacetIterator  fit (mesh_->facet_begin()); 
-
-		// //glShadeModel(GL_FLAT);
-		// glShadeModel(GL_SMOOTH);
-		// int orient = true;// (_orient) ? 1 : -1; 
-		// mesh_->update_normals(); 
-
-		// for ( ; fit != mesh_->facet_end(); ++fit ) {	
-
-		// 	if ( (*fit).status_.is_deleted() ) continue;  
-
-		// 	cshh = fit->halfedge_handle_;
-		// 	FacetHandle fh = mesh_->facet_handle(cshh);
-		// 	Mesh::Normal fct_norm = fit->normal_;
-		// 	Mesh::Coord fct_centr = fit->centroid_;
-
-		// 	glBegin(GL_LINES); 
-		// 	glVertex3fv(fct_centr);
-		// 	glVertex3fv(fct_centr + fct_norm);
-		// 	glEnd();
-		// }
 
 		// return true;
 		HalfedgeHandle       cshh;
@@ -168,8 +146,6 @@ namespace MeshN {
 				glBegin(GL_LINES); 
 				glVertex3fv(fct_centr);
 				glVertex3fv(fct_centr + fct_norm);
-				float ff = fct_norm[0] * fct_norm[0] + fct_norm[1] * fct_norm[1] + fct_norm[2] * fct_norm[2];
-				std::cout << ff << std::endl;
 				glEnd();
 			}
 

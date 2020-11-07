@@ -1,5 +1,6 @@
 
 #include "ExKernelT.h"
+#include <math.h>
 
 namespace MeshN { 
 
@@ -41,6 +42,129 @@ namespace MeshN {
 	void ExKernelT<ExItems>::Laplacian_Smoothing(){
 
 		/////请实现自己的去噪算法////////
+		int facet_num = facet_size();
+
+		int iteration = 10;
+		std::cout<<"Input facenormal filtering numbers (5-20 times): ";
+		// std::cin>>iteration;
+		std::cout << "Please wait.....  "<<std::endl;
+		int i = 0, j = 0, times = 1;
+		do{
+			std::cout << times << std::endl;
+			times++;
+			std::vector<Normal> updateFacetNormal;
+			updateFacetNormal.resize(facet_num);
+
+			FacetIterator fit = facet_begin();
+			for( ; fit!=facet_end(); fit++){
+				//find the 1st facet and store in fhs
+				std::vector<FacetHandle> fhs;
+				HalfedgeHandle hh = fit->halfedge_handle_;
+				FacetHandle    fh = facet_handle(hh);
+				fhs.push_back(fh);
+				//VertexHandle varry[3];
+				std::vector<VertexHandle> varry;
+				varry.resize(3);
+				varry[0] = vertex_handle(hh);
+				varry[1] = vertex_handle( prev_halfedge_handle(hh) );
+				varry[2] = vertex_handle( next_halfedge_handle(hh) );
+				for(i=0; i<3; i++){
+					HalfedgeHandle vahh = halfedge_handle(varry[i] );
+					HalfedgeHandle vacss(vahh);
+					do{
+						FacetHandle vafh = facet_handle(vacss );
+						if(vafh.is_valid() ){
+
+							for(j=0;j<fhs.size(); j++)
+								if(vafh == fhs[j] ) break;
+							if(j>=fhs.size() ) fhs.push_back(vafh);
+						}
+
+						vacss = cw_rotated(vacss );
+
+					}while(vacss != vahh);
+				}
+
+				//calc the median normal
+				// Normal& nf = facet_ref(fh).normal_;
+				// std::vector<Normal> sqn_norm;
+				// for (i = 0; i < fhs.size(); i++)
+				// {
+				// 	Normal& nfi = facet_ref(fhs[i]).normal_;
+				// 	bool Bigest = true;
+				// 	for (int k = 0; k < sqn_norm.size(); k++)
+				// 	{
+				// 		if((nfi - nf) * (nfi - nf) < (sqn_norm[k] - nf) * (sqn_norm[k] - nf))
+				// 		{
+				// 			Bigest = false;
+				// 			sqn_norm.insert(sqn_norm.begin() + k, nfi);
+				// 		}
+				// 	}
+				// 	if(Bigest)
+				// 	{
+				// 		sqn_norm.push_back(nfi);
+				// 	}
+				// }
+
+				// Normal& md_norm = sqn_norm[int(fhs.size() / 2)];
+				Normal& md_norm = facet_ref(fh).normal_;
+				Coord cntrd = facet_ref(fh).centroid_;
+				Scalar K_norm = 0;
+				for(i = 0; i < fhs.size(); i++)
+				{
+					Normal& nfi = facet_ref(fhs[i]).normal_;
+					Coord ci = facet_ref(fhs[i]).centroid_;
+					Scalar sigma = facet_ref(fhs[i]).area_;
+					Scalar ws = exp(-(nfi - md_norm) * (nfi - md_norm) / (2.0 * 0.6 * 0.6));
+					Scalar wc = exp(-(ci - cntrd) * (ci - cntrd) / (2.0 * 0.6 * 0.6));
+					K_norm += sigma * wc * ws;
+					updateFacetNormal[fh.idx()] += nfi * sigma * wc * ws;
+				}
+				updateFacetNormal[fh.idx()] /= K_norm;
+			}
+
+			for(fit=facet_begin();fit != facet_end(); fit++)
+			{
+				facet_ref(facet_handle(fit->halfedge_handle_ ) ).normal_ = updateFacetNormal[facet_handle(fit->halfedge_handle_).idx()].normalize();
+			}
+
+		}while(--iteration);
+
+		int vertex_num = vertex_size();
+		int iterations = 10;
+		std::cout<<"Input vertex update iterations (10-30 times): ";
+		// std::cin>>iterations;
+		std::cout << "Please wait.....  " << std::endl;
+		i = 0;
+
+		do{
+			std::vector<Coord> updateVertexPosition;
+			updateVertexPosition.resize(vertex_num);
+			for(i=0; i<vertex_num; i++){
+				VertexHandle vh(i);
+				Coord&       vc = coord(vh);
+				HalfedgeHandle& hh = halfedge_handle(vh);
+				HalfedgeHandle  css(hh);
+				do{
+					HalfedgeHandle opp_hh = opposite_halfedge_handle(css);
+					Coord&         opp_vc = coord(vertex_handle(opp_hh) );
+					FacetHandle    fl = facet_handle(css);
+					FacetHandle    fr = facet_handle(opp_hh);
+
+					if(fl.is_valid() ){
+						updateVertexPosition[i] += facet_ref(fl).normal_*( facet_ref(fl).normal_ *(opp_vc - vc) );
+					}
+					if(fr.is_valid() ){
+						updateVertexPosition[i] += facet_ref(fr).normal_*( facet_ref(fr).normal_ *(opp_vc - vc) );
+					}
+
+					css = cw_rotated(css);
+
+				}while(css != hh);
+			}
+			for(i=0; i<vertex_num; i++){ vertex_ref(VertexHandle(i) ).coord_ += updateVertexPosition[i]*1.0/18.0;}
+
+		}while(--iterations);
 	}
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -770,7 +894,3 @@ namespace MeshN {
 	///////////////////////////////////////////////////////////////
 
 } /// namespace
-
-
-
-

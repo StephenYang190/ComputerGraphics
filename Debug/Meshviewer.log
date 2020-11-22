@@ -19,18 +19,35 @@ C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\core
 C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\core\KernelT.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
 C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(78,17): warning C4018: “<”: 有符号/无符号不匹配
 C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(42): message : 在编译 类 模板 成员函数“void MeshN::ExKernelT<MeshN::ExItems>::Laplacian_Smoothing(void)”时
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\MeshInterface.h(72): message : 查看对正在编译的函数 模板 实例化“void MeshN::ExKernelT<MeshN::ExItems>::Laplacian_Smoothing(void)”的引用
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\MeshInterface.h(74): message : 查看对正在编译的函数 模板 实例化“void MeshN::ExKernelT<MeshN::ExItems>::Laplacian_Smoothing(void)”的引用
 C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\MeshInterface.h(30): message : 查看对正在编译的 类 模板 实例化“MeshN::ExKernelT<MeshN::ExItems>”的引用
 C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(80,12): warning C4018: “>=”: 有符号/无符号不匹配
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(113,18): warning C4018: “<”: 有符号/无符号不匹配
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(118,16): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(119,16): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(346,6): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(343): message : 在编译 类 模板 成员函数“void MeshN::ExKernelT<MeshN::ExItems>::output_to_file(void)”时
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\MeshInterface.h(83): message : 查看对正在编译的函数 模板 实例化“void MeshN::ExKernelT<MeshN::ExItems>::output_to_file(void)”的引用
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(91,18): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(96,16): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(97,16): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(188,21): warning C4244: “=”: 从“double”转换到“T”，可能丢失数据
+          with
+          [
+              T=float
+          ]
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(149): message : 在编译 类 模板 成员函数“void MeshN::ExKernelT<MeshN::ExItems>::mesh_process(void)”时
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\MeshInterface.h(76): message : 查看对正在编译的函数 模板 实例化“void MeshN::ExKernelT<MeshN::ExItems>::mesh_process(void)”的引用
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(198,1): warning C4305: “参数”: 从“double”到“const T”截断
+          with
+          [
+              T=float
+          ]
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(202,1): warning C4305: “参数”: 从“double”到“const T”截断
+          with
+          [
+              T=float
+          ]
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(381,6): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(378): message : 在编译 类 模板 成员函数“void MeshN::ExKernelT<MeshN::ExItems>::output_to_file(void)”时
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\MeshInterface.h(87): message : 查看对正在编译的函数 模板 实例化“void MeshN::ExKernelT<MeshN::ExItems>::output_to_file(void)”的引用
 C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\read_write\read_write.cpp(24,20): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\read_write\read_write.cpp(16): message : 在编译 类 模板 成员函数“bool MeshN::ReaderWriterT<MyMesh>::off_reader(const char *)”时
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\MeshInterface.h(42): message : 查看对正在编译的函数 模板 实例化“bool MeshN::ReaderWriterT<MyMesh>::off_reader(const char *)”的引用
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\MeshInterface.h(43): message : 查看对正在编译的函数 模板 实例化“bool MeshN::ReaderWriterT<MyMesh>::off_reader(const char *)”的引用
 C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\MeshInterface.h(31): message : 查看对正在编译的 类 模板 实例化“MeshN::ReaderWriterT<MyMesh>”的引用
 C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\read_write\read_write.cpp(36,4): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\read_write\read_write.cpp(43,3): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
@@ -42,40 +59,45 @@ C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\read
               T=float
           ]
 C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\read_write\read_write.cpp(72): message : 在编译 类 模板 成员函数“bool MeshN::ReaderWriterT<MyMesh>::ogl_writer(bool,bool)”时
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\MeshInterface.h(47): message : 查看对正在编译的函数 模板 实例化“bool MeshN::ReaderWriterT<MyMesh>::ogl_writer(bool,bool)”的引用
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\MeshInterface.h(48): message : 查看对正在编译的函数 模板 实例化“bool MeshN::ReaderWriterT<MyMesh>::ogl_writer(bool,bool)”的引用
 C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\read_write\read_write.cpp(140,37): warning C4244: “参数”: 从“int”转换到“const T”，可能丢失数据
           with
           [
               T=float
           ]
 C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\read_write\read_write.cpp(105): message : 在编译 类 模板 成员函数“bool MeshN::ReaderWriterT<MyMesh>::ogl_writer2(bool,bool)”时
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\MeshInterface.h(54): message : 查看对正在编译的函数 模板 实例化“bool MeshN::ReaderWriterT<MyMesh>::ogl_writer2(bool,bool)”的引用
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(676,18): warning C4018: “<”: 有符号/无符号不匹配
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(638): message : 在编译 类 模板 成员函数“void MeshN::ExKernelT<MeshN::ExItems>::adjustFaceNormal_FE(void)”时
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(721): message : 查看对正在编译的函数 模板 实例化“void MeshN::ExKernelT<MeshN::ExItems>::adjustFaceNormal_FE(void)”的引用
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\MeshInterface.h(55): message : 查看对正在编译的函数 模板 实例化“bool MeshN::ReaderWriterT<MyMesh>::ogl_writer2(bool,bool)”的引用
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\read_write\read_write.cpp(148,1): warning C4305: “参数”: 从“double”到“const T”截断
+          with
+          [
+              T=float
+          ]
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(711,18): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(673): message : 在编译 类 模板 成员函数“void MeshN::ExKernelT<MeshN::ExItems>::adjustFaceNormal_FE(void)”时
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(756): message : 查看对正在编译的函数 模板 实例化“void MeshN::ExKernelT<MeshN::ExItems>::adjustFaceNormal_FE(void)”的引用
 C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(11): message : 在编译 类 模板 成员函数“MeshN::ExKernelT<MeshN::ExItems>::ExKernelT(void)”时
 C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\MeshInterface.h(30): message : 查看对正在编译的函数 模板 实例化“MeshN::ExKernelT<MeshN::ExItems>::ExKernelT(void)”的引用
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(678,13): warning C4018: “>=”: 有符号/无符号不匹配
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(687,16): warning C4018: “<”: 有符号/无符号不匹配
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(697,44): warning C4244: “参数”: 从“double”转换到“const T”，可能丢失数据
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(713,13): warning C4018: “>=”: 有符号/无符号不匹配
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(722,16): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(732,44): warning C4244: “参数”: 从“double”转换到“const T”，可能丢失数据
           with
           [
               T=float
           ]
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(812,20): warning C4018: “<”: 有符号/无符号不匹配
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(771): message : 在编译 类 模板 成员函数“void MeshN::ExKernelT<MeshN::ExItems>::adjustFaceNormal_YouyiZheng(void)”时
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(849): message : 查看对正在编译的函数 模板 实例化“void MeshN::ExKernelT<MeshN::ExItems>::adjustFaceNormal_YouyiZheng(void)”的引用
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(822,23): warning C4244: “参数”: 从“double”转换到“const T”，可能丢失数据
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(847,20): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(806): message : 在编译 类 模板 成员函数“void MeshN::ExKernelT<MeshN::ExItems>::adjustFaceNormal_YouyiZheng(void)”时
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(884): message : 查看对正在编译的函数 模板 实例化“void MeshN::ExKernelT<MeshN::ExItems>::adjustFaceNormal_YouyiZheng(void)”的引用
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(857,23): warning C4244: “参数”: 从“double”转换到“const T”，可能丢失数据
           with
           [
               T=float
           ]
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(822,26): warning C4244: “参数”: 从“double”转换到“const T”，可能丢失数据
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(857,26): warning C4244: “参数”: 从“double”转换到“const T”，可能丢失数据
           with
           [
               T=float
           ]
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(822,50): warning C4244: “参数”: 从“_Ty”转换到“const T”，可能丢失数据
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(857,50): warning C4244: “参数”: 从“_Ty”转换到“const T”，可能丢失数据
           with
           [
               _Ty=double
@@ -84,18 +106,18 @@ C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\exte
           [
               T=float
           ]
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(774,10): warning C4101: “MinSigmaS”: 未引用的局部变量
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(192,15): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(179): message : 在编译 类 模板 成员函数“float MeshN::ExKernelT<MeshN::ExItems>::calc_facet_area(const MeshN::InternalHandles::FacetHandle &)”时
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(218): message : 查看对正在编译的函数 模板 实例化“float MeshN::ExKernelT<MeshN::ExItems>::calc_facet_area(const MeshN::InternalHandles::FacetHandle &)”的引用
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(385): message : 在编译 类 模板 成员函数“MathN::Vector3T<float> MeshN::ExKernelT<MeshN::ExItems>::normal(const MeshN::InternalHandles::FacetHandle &)”时
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(809,10): warning C4101: “MinSigmaS”: 未引用的局部变量
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(227,15): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(214): message : 在编译 类 模板 成员函数“float MeshN::ExKernelT<MeshN::ExItems>::calc_facet_area(const MeshN::InternalHandles::FacetHandle &)”时
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(253): message : 查看对正在编译的函数 模板 实例化“float MeshN::ExKernelT<MeshN::ExItems>::calc_facet_area(const MeshN::InternalHandles::FacetHandle &)”的引用
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(420): message : 在编译 类 模板 成员函数“MathN::Vector3T<float> MeshN::ExKernelT<MeshN::ExItems>::normal(const MeshN::InternalHandles::FacetHandle &)”时
 C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\read_write\read_write.cpp(92): message : 查看对正在编译的函数 模板 实例化“MathN::Vector3T<float> MeshN::ExKernelT<MeshN::ExItems>::normal(const MeshN::InternalHandles::FacetHandle &)”的引用
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(193,15): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(194,15): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(324,18): warning C4018: “<”: 有符号/无符号不匹配
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(300): message : 在编译 类 模板 成员函数“void MeshN::ExKernelT<MeshN::ExItems>::getNeighborFaceN2(MeshN::InternalHandles::FacetHandle &,std::vector<MeshN::InternalHandles::FacetHandle,std::allocator<MeshN::InternalHandles::FacetHandle>> &)”时
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(807): message : 查看对正在编译的函数 模板 实例化“void MeshN::ExKernelT<MeshN::ExItems>::getNeighborFaceN2(MeshN::InternalHandles::FacetHandle &,std::vector<MeshN::InternalHandles::FacetHandle,std::allocator<MeshN::InternalHandles::FacetHandle>> &)”的引用
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(329,12): warning C4018: “>=”: 有符号/无符号不匹配
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(228,15): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(229,15): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(359,18): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(335): message : 在编译 类 模板 成员函数“void MeshN::ExKernelT<MeshN::ExItems>::getNeighborFaceN2(MeshN::InternalHandles::FacetHandle &,std::vector<MeshN::InternalHandles::FacetHandle,std::allocator<MeshN::InternalHandles::FacetHandle>> &)”时
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(842): message : 查看对正在编译的函数 模板 实例化“void MeshN::ExKernelT<MeshN::ExItems>::getNeighborFaceN2(MeshN::InternalHandles::FacetHandle &,std::vector<MeshN::InternalHandles::FacetHandle,std::allocator<MeshN::InternalHandles::FacetHandle>> &)”的引用
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(364,12): warning C4018: “>=”: 有符号/无符号不匹配
 C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\core\KernelT.cpp(707,4): warning C4018: “<”: 有符号/无符号不匹配
 C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\core\KernelT.cpp(706): message : 在编译 类 模板 成员函数“MeshN::InternalHandles::HalfedgeHandle MeshN::KernelT<ExItems>::_find_halfedge_handle(const MeshN::InternalHandles::VertexHandle &,const MeshN::InternalHandles::VertexHandle &)”时
           with
@@ -107,11 +129,11 @@ C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\core
           [
               ExItems=MeshN::ExItems
           ]
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(464,21): warning C4018: “<”: 有符号/无符号不匹配
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(441): message : 在编译 类 模板 成员函数“MathN::Vector3T<float> MeshN::ExKernelT<MeshN::ExItems>::calc_normal(const MeshN::InternalHandles::VertexHandle &)”时
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(485): message : 查看对正在编译的函数 模板 实例化“MathN::Vector3T<float> MeshN::ExKernelT<MeshN::ExItems>::calc_normal(const MeshN::InternalHandles::VertexHandle &)”的引用
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(179): message : 在编译 类 模板 成员函数“float MeshN::ExKernelT<MeshN::ExItems>::calc_facet_area(const MeshN::InternalHandles::FacetHandle &)”时
-C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(218): message : 查看对正在编译的函数 模板 实例化“float MeshN::ExKernelT<MeshN::ExItems>::calc_facet_area(const MeshN::InternalHandles::FacetHandle &)”的引用
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(499,21): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(476): message : 在编译 类 模板 成员函数“MathN::Vector3T<float> MeshN::ExKernelT<MeshN::ExItems>::calc_normal(const MeshN::InternalHandles::VertexHandle &)”时
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(520): message : 查看对正在编译的函数 模板 实例化“MathN::Vector3T<float> MeshN::ExKernelT<MeshN::ExItems>::calc_normal(const MeshN::InternalHandles::VertexHandle &)”的引用
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(214): message : 在编译 类 模板 成员函数“float MeshN::ExKernelT<MeshN::ExItems>::calc_facet_area(const MeshN::InternalHandles::FacetHandle &)”时
+C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\extension\ExKernelT.cpp(253): message : 查看对正在编译的函数 模板 实例化“float MeshN::ExKernelT<MeshN::ExItems>::calc_facet_area(const MeshN::InternalHandles::FacetHandle &)”的引用
   BaseHandle.cpp
   KernelT.cpp
 C:\Users\sq\Desktop\ComputerGraphics\meshviewer_project-stu\Meshviewer\mesh\core\KernelT.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失

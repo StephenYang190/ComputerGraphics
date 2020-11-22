@@ -85,28 +85,6 @@ namespace MeshN {
 					}while(vacss != vahh);
 				}
 
-				//calc the median normal
-				// Normal& nf = facet_ref(fh).normal_;
-				// std::vector<Normal> sqn_norm;
-				// for (i = 0; i < fhs.size(); i++)
-				// {
-				// 	Normal& nfi = facet_ref(fhs[i]).normal_;
-				// 	bool Bigest = true;
-				// 	for (int k = 0; k < sqn_norm.size(); k++)
-				// 	{
-				// 		if((nfi - nf) * (nfi - nf) < (sqn_norm[k] - nf) * (sqn_norm[k] - nf))
-				// 		{
-				// 			Bigest = false;
-				// 			sqn_norm.insert(sqn_norm.begin() + k, nfi);
-				// 		}
-				// 	}
-				// 	if(Bigest)
-				// 	{
-				// 		sqn_norm.push_back(nfi);
-				// 	}
-				// }
-
-				// Normal& md_norm = sqn_norm[int(fhs.size() / 2)];
 				Normal& md_norm = facet_ref(fh).normal_;
 				Coord cntrd = facet_ref(fh).centroid_;
 				Scalar K_norm = 0;
@@ -133,7 +111,6 @@ namespace MeshN {
 		int vertex_num = vertex_size();
 		int iterations = 10;
 		std::cout<<"Input vertex update iterations (10-30 times): ";
-		// std::cin>>iterations;
 		std::cout << "Please wait.....  " << std::endl;
 		i = 0;
 
@@ -170,7 +147,65 @@ namespace MeshN {
 ////////////////////////////////////////////////////////////////////////////////////
 	template<class ExItems>
 	void ExKernelT<ExItems>::mesh_process(){///////(可选，在三角网格上实现一种操作，例如特征提取，网格分割，三角网格变形等等)
+		int facet_num = facet_size();
 
+		std::cout << "Please wait.....  "<<std::endl;
+		int i = 0, j = 0;
+		double V1, V2, S;
+		int phase = 0;
+
+		std::vector<Coord> updateVertexCoord;
+		updateVertexCoord.resize(facet_num);
+
+		Scalar K_norm = 1;
+		double mu = 0, sigma = 0.2;
+
+		int vertex_num = vertex_size();
+		i = 0;
+
+		std::vector<Coord> updateVertexPosition;
+		updateVertexPosition.resize(vertex_num);
+		for(i=0; i<vertex_num; i++){
+			Coord result;
+			for(int kkk = 0; kkk < 3; kkk++)
+			{	double X;
+				double U1,U2;
+				if ( phase == 0 ) {
+					do {
+						U1 = (double)rand() / RAND_MAX;
+						U2 = (double)rand() / RAND_MAX;
+
+						V1 = 2 * U1 - 1;
+						V2 = 2 * U2 - 1;
+						S = V1 * V1 + V2 * V2;
+					} while(S >= 1 || S == 0);
+
+					X = V1 * sqrt(-2 * log(S) / S);
+				} else{
+					X = V2 * sqrt(-2 * log(S) / S);
+				}
+				phase = 1 - phase;
+				result[kkk] = mu+sigma*X;
+			}
+			updateVertexPosition[i] += result;
+		}
+		for(i=0; i<vertex_num; i++){
+			Coord noise = updateVertexPosition[i]*K_norm;
+			if(noise * noise > 0.03)
+			{
+				if(noise[0] > 0)
+				{
+					noise = Coord{0.1, 0.1, 0.1};
+				}
+				else
+				{
+					noise = Coord{-0.1, -0.1, -0.1};
+				}
+				
+			}
+			vertex_ref(VertexHandle(i) ).coord_ += noise;
+		}
+		
 	}
 
 ////////////////////////////////////////////////////////////////////////////////////

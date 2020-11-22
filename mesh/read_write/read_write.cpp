@@ -129,7 +129,7 @@ namespace MeshN {
 				VertexHandle& vh1 = mesh_->vertex_handle(hh);
 				VertexHandle& vh2 = mesh_->vertex_handle(n_hh);
 				VertexHandle& vh3 = mesh_->vertex_handle(pre_hh);
-
+ 
 				Mesh::Coord fct_centr = (mesh_->coord(vh1) + mesh_->coord(vh2)+ mesh_->coord(vh3) )/3.0;
 			
 				const VertexHandle& vh0 = mesh_->vertex_handle(cshh);
@@ -145,7 +145,7 @@ namespace MeshN {
 
 				glBegin(GL_LINES); 
 				glVertex3fv(fct_centr);
-				glVertex3fv(fct_centr + fct_norm);
+				glVertex3fv(fct_centr + fct_norm * 0.1);
 				glEnd();
 			}
 

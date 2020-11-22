@@ -36,7 +36,8 @@ void MyMeshInit(void) { //
 	std::string modelname;
 	std::cout<<"Input model(just read .OFF file NOW):\n";
 	std::cout<<"./models/";
-	std::cin>>modelname;
+	// std::cin>>modelname;
+	modelname = "cow.off";
 	totalmodelname += modelname;
 
 	reader.off_reader( totalmodelname.c_str() );
@@ -63,13 +64,16 @@ void MyMeshInit(void) { //
 		std::cout << "number 2 present Youyi Zheng on TVCG 2011" << std::endl;
 		std::cout << "number 3 present your method" << std::endl;
 		std::cout << "input number(1-3): " << std::endl;
-		std::cin >> choice;
+		// std::cin >> choice;
+		choice = 4;
 		if (choice == 1)
 			mesh.Mesh_Denoising_FE();//Sun et al.
 		else if (choice == 2)
 			mesh.Mesh_Denoising_YouyiZheng();
 		else if (choice == 3)
 			mesh.Laplacian_Smoothing();
+		else if (choice == 4)
+			mesh.mesh_process();
 		std::cout << "Finish!!!" << std::endl;
 		std::cout << "Press b to show the result of denoising" << std::endl;
 
